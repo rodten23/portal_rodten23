@@ -50,3 +50,38 @@ html, body {
 #header .profile .social-links a:hover {
     background: #149ddd;    
 }
+
+.nav-menu {
+    padding: 1.5rem;   
+}
+
+.nav-menu a,
+.nav-menu a:focus {
+    display: flex;
+    align-items: center;
+    color: #a8a9b4;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.nav-menu a i,
+.nav-menu a:focus i {
+    font-size: 23px;
+    padding-right: 0.8rem;
+    color: #6f7180;
+}
+
+.nav-menu a:hover,
+.nav-menu .active,
+.nav-menu .active:focus,
+.nav-menu li:hover > a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-menu a:hover i,
+.nav-menu .active i,
+.nav-menu .active:focus i,
+.nav-menu li:hover > a i {
+    color: #149ddd;
+}
