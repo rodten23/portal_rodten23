@@ -91,11 +91,33 @@ html, body {
 }
 
 section#inicio {
-    background-image: url("./img/brenda-godinez-wZz1ZYntWa4-unsplash.jpg");
+    background-image: url("./img/mikolaj-DCzpr09cTXY-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     width: 100%;
     height: 100vh;
+}
+
+section#inicio h2 {
+    font-size: 4rem;
+}
+
+section#inicio span#subtitle {
+    margin-right: 8rem;
+    font-size: 1.5rem;
+}
+
+.text-shadown {
+    text-shadow: 4px 4px 10px #000000;
+}
+
+section#inicio div#arraste {
+    width: 9rem;
+}
+
+section#inicio div#arraste a {
+    text-decoration: none;
+    color: #fff;
 }
