@@ -24,4 +24,14 @@ html, body{
     display: block;
     width: 120px;
     border: 8px solid #2c2f3f;
+    border-radius: 50%;
+}
+
+#header .profile h1{
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    text-align-last: center;
+    color: #fff;
 }
