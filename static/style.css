@@ -101,7 +101,7 @@ section#inicio {
 }
 
 section#inicio h2 {
-    font-size: 4rem;
+    font-size: 6rem;
 }
 
 section#inicio span#subtitle {
@@ -137,4 +137,23 @@ i.menu-mobile {
     display: none;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 1024px) {
+    #header {
+        left: -300px;
+    }
+    i.menu-mobile {
+        display: flex;
+    }
+    section#inicio h2 {
+        font-size: 3.5rem;
+    }
+    span#subtitle {
+        margin-right: 0;
+        font-size: 1rem;
+    }
+    #main {
+        margin-left: 0;
+    }
 }
