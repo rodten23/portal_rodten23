@@ -139,6 +139,14 @@ i.menu-mobile {
     align-items: center;
 }
 
+.menu-nav-active {
+    overflow: hidden;
+}
+
+.menu-nav-active #header {
+    left: 0;
+}
+
 @media (max-width: 1024px) {
     #header {
         left: -300px;
