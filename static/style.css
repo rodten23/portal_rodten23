@@ -281,3 +281,7 @@ i.menu-mobile {
         transform: translate3d(0, 100%, 0);
     }
 }
+
+#btn-enviando {
+    display: none;
+}

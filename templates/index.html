@@ -484,7 +484,12 @@
                                 </div>
                                 
                                 <div class="col-12 d-flex justify-content-center mt-5">
-                                    <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+                                    <button id="btn-enviar" type="submit" class="btn btn-primary">Enviar mensagem</button>
+
+                                    <button id="btn-enviando" class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                        <span role="status">Enviando...</span>
+                                      </button>
                                 </div>
 
                             </form>

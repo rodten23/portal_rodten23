@@ -45,3 +45,13 @@ animeScroll();
 window.addEventListener("scroll", ()=> {
     animeScroll();
 })
+
+// Ativar carregamento no botão de enviar formulário
+
+const btnEnviar = document.querySelector('#btn-enviar')
+const btnEnviando = document.querySelector('#btn-enviando')
+
+btnEnviar.addEventListener("click", () => {
+    btnEnviando.style.display = "block";
+    btnEnviar.style.display = "none"
+})
