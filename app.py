@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, flash
 from flask_mail import Mail, Message
 from config import senha_transacoes, meu_email, senha_meu_email
 
@@ -50,6 +50,10 @@ def send():
         )
 
         mail.send(msg)
+
+        flash('Mensagem enviada com sucesso!')
+    
+    return redirect('/')
 
 
 if __name__ == '__main__':
