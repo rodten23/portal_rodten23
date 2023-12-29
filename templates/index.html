@@ -466,21 +466,21 @@
                     <div class="col-md-7 mt-5 mt-md-0">
                         <div class="card p-5 h-100 shadow border-0" data-anime="right">
 
-                            <form class="row g-3">
+                            <form class="row g-3" action='/send' method="POST">
 
                                 <div class="col-md-6">
                                     <label for="nome" class="form-label">Nome:</label>
-                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome...">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome..." required>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">E-mail:</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail...">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail..." required>
                                 </div>
                                 
                                 <div class="col-12">
                                     <label for="message" class="form-label">Mensagem:</label>
-                                    <textarea type="text" class="form-control" id="message" name="message" rows="9" placeholder="Digite sua mensagem..."></textarea>
+                                    <textarea type="text" class="form-control" id="message" name="message" rows="9" placeholder="Digite sua mensagem..." required></textarea>
                                 </div>
                                 
                                 <div class="col-12 d-flex justify-content-center mt-5">
