@@ -14,6 +14,16 @@ mail_settings = {
     "MAIL_PASSWORD": senha_meu_email
 }
 
+app.config.update(mail_settings)
+
+mail = Mail(app)
+
+class Contato:
+    def __init__(self, nome, email, message):
+        self.nome = nome
+        self.email = email
+        self.message = message
+
 @app.route('/')
 def index():
     return render_template('index.html')
