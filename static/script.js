@@ -55,3 +55,10 @@ btnEnviar.addEventListener("click", () => {
     btnEnviando.style.display = "block";
     btnEnviar.style.display = "none"
 })
+
+// Tirar mensagem (alerta) de sucesso depois de 5 segundos (5000 milisegundos)
+
+setTimeout( () => {
+    document.querySelector('#alerta').style.display = 'none';
+
+}, 5000)
