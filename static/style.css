@@ -276,4 +276,8 @@ i.menu-mobile {
     .carousel-control-next {
         margin-right: 0;
     }
+
+    [data-anime="right"] {
+        transform: translate3d(0, 100%, 0);
+    }
 }
