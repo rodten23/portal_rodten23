@@ -1,17 +1,19 @@
 from flask import Flask, render_template, redirect, request, flash
 from flask_mail import Mail, Message
-from config import senha_transacoes, meu_email, senha_meu_email
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = senha_transacoes
+app.secret_key = os.getenv("SENHA_CRIPTO_TRANSACOES")
 
 mail_settings = {
     "MAIL_SERVER": "smtp.gmail.com",
     "MAIL_PORT": 587,
     "MAIL_USE_TLS": True,
     "MAIL_USE_SSL": False,
-    "MAIL_USERNAME": meu_email,
-    "MAIL_PASSWORD": senha_meu_email
+    "MAIL_USERNAME": os.getenv("MEU_EMAIL"),
+    "MAIL_PASSWORD": os.getenv("SENHA_MEU_EMAIL")
 }
 
 app.config.update(mail_settings)
@@ -40,7 +42,7 @@ def send():
         msg = Message(
             subject = f'{form_Contato.nome} te enviou uma mensagem pelo portifólio!',
             sender = app.config.get("MAIL_USERNAME"),
-            recipients = ['rodten23@gmail.com', meu_email],
+            recipients = ['rodten23@gmail.com', app.config.get("MAIL_USERNAME")],
             body = f'''
 
             {form_Contato.nome}, com o e-mail {form_Contato.email}, enviou a seguinte mensagem:
