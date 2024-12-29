@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, flash
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
+from datetime import date
 import os
 load_dotenv()
 
@@ -28,7 +29,12 @@ class Contato:
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    data_corrente = date.today()
+    ano_nascimento = 1981
+    idade = data_corrente.year - ano_nascimento
+    ano_inicio_empresa = 2022
+    experiencia = data_corrente.year - ano_inicio_empresa
+    return render_template('index.html', idade=idade, experiencia=experiencia)
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
