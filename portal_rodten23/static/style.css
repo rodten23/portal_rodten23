@@ -11,7 +11,10 @@ html, body {
     top: 0;
     left: 0;
     bottom: 0;
-    background: #021124;
+    background-color: #000017;
+    background-image: url("./img/header_3d-abstract-background-with-flowing-hexagonal-grid-design_11285.png");
+    background-repeat: no-repeat no-repeat;
+    background-position: bottom;
     overflow-y: auto;
     width: 300px;
     transition: all ease-in-out 0.5s;
@@ -38,7 +41,7 @@ html, body {
 
 #header .profile .social-links a {
     font-size: 1rem;
-    background: #212431;
+    background: #2c2f3f;
     color: #fff;
     padding: 0.6rem;
     margin-right: 1rem;
@@ -91,7 +94,7 @@ html, body {
 }
 
 section#inicio {
-    background-image: url("./img/mikolaj-DCzpr09cTXY-unsplash.jpg");
+    background-image: url("./img/close-up-keyboard-used-by-software-engineer-programming-home_88598.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -295,14 +298,13 @@ i.menu-mobile {
 
 #footer {
     padding: 15px;
-    color: #ffffff;
+    color: #000017;
     font-size: 14px;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 300px;
     z-index: 9999;
-    background-color: #021124;
     transition: .3s;
 }
 
