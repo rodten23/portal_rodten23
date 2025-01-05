@@ -42,9 +42,9 @@ html, body {
 #header .profile .social-links a {
     font-size: 1rem;
     background: #2c2f3f;
+    margin: 0.5rem;
     color: #fff;
     padding: 0.6rem;
-    margin-right: 1rem;
     border-radius: 50%;
     transition: 0.3s;
     text-decoration: none;
