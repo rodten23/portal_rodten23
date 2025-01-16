@@ -14,7 +14,7 @@ html, body {
     background-color: #000017;
     background-image: url("./img/header_3d-abstract-background-with-flowing-hexagonal-grid-design_11285.png");
     background-repeat: no-repeat no-repeat;
-    background-position: bottom;
+    background-position: 45% 112%;
     overflow-y: auto;
     width: 300px;
     transition: all ease-in-out 0.5s;
@@ -241,6 +241,11 @@ i.menu-mobile {
 
 .carousel-indicators {
     margin-bottom: -35px;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border-bottom-color: #ced0db;
 }
 
 /* Animação */
