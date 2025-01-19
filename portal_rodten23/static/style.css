@@ -248,6 +248,15 @@ i.menu-mobile {
   border-bottom-color: #ced0db;
 }
 
+#contato .btn {
+    background-color: #252c90;
+    border-color: #ffffff;
+}
+
+#contato .btn:hover{
+    background-color: #149ddd;
+}
+
 /* Animação */
 
 [data-anime] {
@@ -303,7 +312,7 @@ i.menu-mobile {
 
 #footer {
     padding: 15px;
-    color: #000017;
+    color: #ffffff;
     font-size: 14px;
     position: fixed;
     left: 0;
@@ -318,5 +327,6 @@ i.menu-mobile {
         position: static;
         width: auto;
         padding: 20px 15px;
+        background-color: #000017;
     }
 }
