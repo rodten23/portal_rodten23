@@ -257,6 +257,18 @@ i.menu-mobile {
     background-color: #149ddd;
 }
 
+#agradecimentos i{
+    color: rgb(180, 0, 0)
+}
+
+#agradecimentos .familia{
+    color: rgb(180, 0, 0)
+}
+
+#agradecimentos .amo{
+    color: rgb(180, 0, 0)
+}
+
 /* Animação */
 
 [data-anime] {
@@ -326,7 +338,7 @@ i.menu-mobile {
     #footer {
         position: static;
         width: auto;
-        padding: 20px 15px;
+        padding: 15px 15px;
         background-color: #000017;
     }
 }
