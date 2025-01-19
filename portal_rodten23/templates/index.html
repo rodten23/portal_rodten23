@@ -18,7 +18,7 @@
         <section class="profile">
             <img src="../static/img/rodrigo_perfil.jpg" alt="Foto do Rodrigo">
 
-            <h1>Rodrigo Alves Tenório</h1>
+            <h1>RodTen23</h1>
 
             <div class="social-links mt-4 text-center">
 
@@ -42,7 +42,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#sobre">
-                        <i class="bi bi-person"></i> Sobre</a>
+                        <i class="bi bi-person-square"></i> Sobre</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#habilidades">
@@ -59,7 +59,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#contato">
                         <i class="bi bi-envelope"></i> Contato</a>
-                </li>                
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#agradecimentos">
+                        <i class="bi bi-chat-left-heart"></i> Agradecimentos e Créditos</a>
+                </li>              
             </ul>
 
         </nav>
@@ -106,7 +110,7 @@
                                         Niver: <span class="fw-lighter">23 de Outubro</span>
                                     </li>
                                     <li class="list-group-item">
-                                        Idade: <span class="fw-lighter">42 anos</span>
+                                        Idade: <span class="fw-lighter">{{ idade }} anos</span>
                                     </li>
                                     <li class="list-group-item">
                                         Cidade: <span class="fw-lighter">São Paulo</span>
@@ -133,7 +137,7 @@
                                         class="fw-lighter text-decoration-none link-dark">Vivo</a>
                                     </li>
                                     <li class="list-group-item">
-                                        Experiência: <span class="fw-lighter">18 meses</span>
+                                        Experiência: <span class="fw-lighter">{{ experiencia }} anos</span>
                                     </li>  
                                 </ul>
                             </div>
@@ -503,6 +507,77 @@
             </div>
 
 
+        </section>
+
+        <section class="mt-5 section-bg" id="agradecimentos">
+
+            <div class="container pb-5">
+                <div class="row w-100">
+                    <div class="col-md-12" data-anime="down">
+                        <h2 class="pt-5">Agradecimentos e Créditos</h2>
+                        <h5 class="fw-lighter">Deixo aqui meus agradecimentos especiais para...</h5>
+                    </div>
+    
+                    <div class="row mt-4">
+                        <div class="col-md-6" data-anime="left">
+                            <div class="row mt-3 mb-3">
+                                <div>
+                                    <ul class="list-group list-group-flush fs-5">
+                                        <li class="list-group-item"><i class="bi bi-heart-fill"></i> <span class="familia fw-bolder"> Minha família</span><span class="fw-lighter">, por todo Amor, Carinho e Suporte que sempre me deram.</span> <span class="amo fw-bolder"> Amo Vocês! </span><i class="bi bi-heart-fill"></i>
+                                        </li>
+                                        <li class="list-group-item"><a target="_blank" href="https://vivo.com.br/para-empresas/meu-vivo-empresas">Equipe Vivo Empresas</a><span class="fw-lighter">, uma verdadeira família, que me deu a oportunidade de migrar para carreira de TI, além de sempre me incentivar e orientar para ser um profissional cada vez melhor.</span>
+                                        </li>
+                                        <li class="list-group-item"><a target="_blank" href="https://www.youtube.com/@Diolinux">Diolinux (Dionatan Simioni)</a><span class="fw-lighter">, pois foi com sua incrível didática e enormes conhecimento e carisma que entrei pra valer no mundo Linux e no estudo de tecnologias.</span>
+                                        </li>
+                                        <li class="list-group-item"><a target="_blank" href="https://www.cursoemvideo.com/">Gustavo Guanabara (Curso em Vídeo)</a><span class="fw-lighter"> e o </span><a target="_blank" href="https://www.youtube.com/@Dunossauro">Dunossauro (Eduardo Mendes)</a><span class="fw-lighter">, dois caras fantásticos que de tem conhecimento e didática sem igual e fazem um exemplar trabalho de educação tecnológica.</span>
+                                        </li>
+                                        <li class="list-group-item"><a target="_blank" href="https://www.salvatore.academy/">Paulo Salvatore</a><span class="fw-lighter"> e ao time </span><a target="_blank" href="https://www.oceanbrasil.com/">Samsung Ocean</a><span class="fw-lighter">, por todo o aprendizado em tecnologia que tive com vocês.</span>
+                                        </li>
+                                        <li class="list-group-item"><a target="_blank" href="https://www.youtube.com/@thi_code">Thi Code (Thiago Veiga Lima)</a><span class="fw-lighter">, mais um excelente professor que gentilmente fez o curso que me permitiu desenvolver este site.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" data-anime="right">
+                            <div class="row mt-3 mb-3">
+                                <div>
+                                    <ul class="list-group list-group-flush fs-5">
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://www.python.org/">Python</a> <span class="fw-lighter">e sua comunidade por tudo que são e representam.</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://github.com/">Github</a> <span class="fw-lighter">por todo apoio que que dá aos desenvolvedores.</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://br.freepik.com/autor/dcstudio">Freepik & DC Studio</a> <span class="fw-lighter">pela linda foto da seção início.</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://br.freepik.com/autor/kjpargeter">Freepik & kjpargeter</a> <span class="fw-lighter">pela excelente ilustração do menu.</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://learn.microsoft.com/pt-br/training/">Microsoft</a> <span class="fw-lighter">pelo excelente conteúdo do Learn e possibilitar a publicação deste site gratuitamente. </span>
+                                        </li>
+                                    </ul>
+                                </div>                                    
+                            </div>                       
+                        </div>
+                    </div>
+                </div>
+
+                <div class="outros">
+                    <div class="text-center">
+                        <h5>E meu profundo agradecimento também às inúmeras pessoas que ajudaram na minha formação e me trouxeram onde estou.</h5>
+                    </div>
+                </div>      
+
+                <div class="dev">
+                    <div class="text-center">
+                        <p class="fw-lighter fst-italic"><br><br><br>Este site foi desenvolvido usando Python, HTML, CSS, Flask e Javascript, com repositório no Github e implatação no Microsoft Azure.</p>
+                    </div>
+                </div>  
+            </div>
         </section>
 
         {% with messages = get_flashed_messages() %}

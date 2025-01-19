@@ -11,7 +11,10 @@ html, body {
     top: 0;
     left: 0;
     bottom: 0;
-    background: #021124;
+    background-color: #000017;
+    background-image: url("./img/header_3d-abstract-background-with-flowing-hexagonal-grid-design_11285.png");
+    background-repeat: no-repeat no-repeat;
+    background-position: 45% 112%;
     overflow-y: auto;
     width: 300px;
     transition: all ease-in-out 0.5s;
@@ -38,10 +41,10 @@ html, body {
 
 #header .profile .social-links a {
     font-size: 1rem;
-    background: #212431;
+    background: #2c2f3f;
+    margin: 0.5rem;
     color: #fff;
     padding: 0.6rem;
-    margin-right: 1rem;
     border-radius: 50%;
     transition: 0.3s;
     text-decoration: none;
@@ -91,7 +94,7 @@ html, body {
 }
 
 section#inicio {
-    background-image: url("./img/mikolaj-DCzpr09cTXY-unsplash.jpg");
+    background-image: url("./img/close-up-keyboard-used-by-software-engineer-programming-home_88598.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -101,12 +104,12 @@ section#inicio {
 }
 
 section#inicio h2 {
-    margin-left: 4rem;
-    font-size: 6rem;
+    margin-left: 2rem;
+    font-size: 4.5rem;
 }
 
 section#inicio span#subtitle {
-    margin-left: 4rem;
+    margin-left: 2rem;
     font-size: 1.5rem;
 }
 
@@ -240,6 +243,32 @@ i.menu-mobile {
     margin-bottom: -35px;
 }
 
+.list-group-item {
+  background-color: transparent;
+  border-bottom-color: #ced0db;
+}
+
+#contato .btn {
+    background-color: #252c90;
+    border-color: #ffffff;
+}
+
+#contato .btn:hover{
+    background-color: #149ddd;
+}
+
+#agradecimentos i{
+    color: rgb(180, 0, 0)
+}
+
+#agradecimentos .familia{
+    color: rgb(180, 0, 0)
+}
+
+#agradecimentos .amo{
+    color: rgb(180, 0, 0)
+}
+
 /* Animação */
 
 [data-anime] {
@@ -302,7 +331,6 @@ i.menu-mobile {
     bottom: 0;
     width: 300px;
     z-index: 9999;
-    background-color: #021124;
     transition: .3s;
 }
 
@@ -310,6 +338,7 @@ i.menu-mobile {
     #footer {
         position: static;
         width: auto;
-        padding: 20px 15px;
+        padding: 15px 15px;
+        background-color: #000017;
     }
 }

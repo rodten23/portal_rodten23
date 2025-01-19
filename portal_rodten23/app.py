@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, request, flash
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
+from datetime import date
+from portal_rodten23.calculo_idade import calcular_idade
 import os
 load_dotenv()
 
@@ -28,7 +30,15 @@ class Contato:
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    data_atual =  date.today()
+    ano_nasc = os.getenv('ANO_NASCIMENTO')
+    mes_nasc = os.getenv('MES_NASCIMENTO')
+    dia_nasc = os.getenv('DIA_NASCIMENTO')
+    ano_inicio_empresa = os.getenv('ANO_INICIO_EMPRESA')
+
+    idade = calcular_idade(data_atual, ano_nasc, mes_nasc, dia_nasc)
+    experiencia = data_atual.year - int(ano_inicio_empresa)
+    return render_template('index.html', idade = idade, experiencia = experiencia)
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
