@@ -255,24 +255,28 @@ i.menu-mobile {
   border-bottom-color: #ced0db;
 }
 
+#sobre img {
+    margin-bottom: 30px;
+}
+
 #contato .btn {
     background-color: #252c90;
     border-color: #ffffff;
 }
 
-#contato .btn:hover{
+#contato .btn:hover {
     background-color: #149ddd;
 }
 
-#agradecimentos i{
+#agradecimentos i {
     color: rgb(180, 0, 0)
 }
 
-#agradecimentos .familia{
+#agradecimentos .familia { 
     color: rgb(180, 0, 0)
 }
 
-#agradecimentos .amo{
+#agradecimentos .amo {
     color: rgb(180, 0, 0)
 }
 
