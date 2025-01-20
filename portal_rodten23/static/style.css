@@ -151,6 +151,12 @@ i.menu-mobile {
     left: 0;
 }
 
+@media (max-height:776px){
+    #header {
+        background-image: none;
+    }
+}
+
 @media (max-width: 1024px) {
     #header {
         left: -300px;
