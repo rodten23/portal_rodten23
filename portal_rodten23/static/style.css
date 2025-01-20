@@ -26,7 +26,7 @@ html, body {
     margin: 15px auto;
     display: block;
     width: 120px;
-    border: 8px solid #2c2f3f;
+    border: 8px solid #555970;
     border-radius: 50%;
 }
 
@@ -41,7 +41,7 @@ html, body {
 
 #header .profile .social-links a {
     font-size: 1rem;
-    background: #2c2f3f;
+    background: #555970;
     margin: 0.5rem;
     color: #fff;
     padding: 0.6rem;
@@ -151,9 +151,16 @@ i.menu-mobile {
     left: 0;
 }
 
+@media (max-height:776px){
+    #header {
+        background-image: none;
+    }
+}
+
 @media (max-width: 1024px) {
     #header {
         left: -300px;
+        background-image: none;
     }
     i.menu-mobile {
         display: flex;
@@ -248,24 +255,28 @@ i.menu-mobile {
   border-bottom-color: #ced0db;
 }
 
+#sobre img {
+    margin-bottom: 30px;
+}
+
 #contato .btn {
     background-color: #252c90;
     border-color: #ffffff;
 }
 
-#contato .btn:hover{
+#contato .btn:hover {
     background-color: #149ddd;
 }
 
-#agradecimentos i{
+#agradecimentos i {
     color: rgb(180, 0, 0)
 }
 
-#agradecimentos .familia{
+#agradecimentos .familia { 
     color: rgb(180, 0, 0)
 }
 
-#agradecimentos .amo{
+#agradecimentos .amo {
     color: rgb(180, 0, 0)
 }
 
