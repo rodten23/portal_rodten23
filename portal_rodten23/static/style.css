@@ -259,6 +259,42 @@ i.menu-mobile {
     margin-bottom: 30px;
 }
 
+#sobre .student{
+    margin-bottom: 0px;
+}
+
+#sobre .buddha{
+    margin-bottom: 0px;
+}
+
+#sobre .sou_de{
+    margin-bottom: 0px;
+    margin-left: 4px;
+    margin-right: 5px;
+}
+
+
+#sobre .livros{
+    margin-bottom: 0px;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+
+#sobre .id-card{
+    margin-bottom: 0px;
+}
+
+#sobre .rocket{
+    margin-top: 3px;
+    margin-bottom: 4px;
+
+}
+
+#sobre .unity{
+    margin-bottom: 0px;
+}
+
 #contato .btn {
     background-color: #252c90;
     border-color: #ffffff;
