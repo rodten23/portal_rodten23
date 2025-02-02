@@ -38,7 +38,7 @@ def index():
 
     idade = calcular_idade(data_atual, ano_nasc, mes_nasc, dia_nasc)
     experiencia = data_atual.year - int(ano_inicio_empresa)
-    return render_template('index.html', idade = idade, experiencia = experiencia)
+    return render_template('index.html', idade = idade, experiencia = experiencia, ano_corrente = data_atual.year)
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
