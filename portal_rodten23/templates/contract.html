@@ -15,7 +15,7 @@
 
     <div>
         <label for="celular" class="form-label">Celular:</label>
-        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite seu nome..." required>
+        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite seu celular..." maxlength="13" required>
     </div>
 
     <div>
@@ -37,6 +37,14 @@
     <div id='container' style='height: 600px'></div>
 
     <script type='text/javascript'>
+
+      document.getElementById('celular').addEventListener('input', function(c) {
+		var value = c.target.value;
+		var celularPattern = value.replace(/\D/g, '')
+							  .replace(/^(\d{2})(\d)/g, "$1 $2")
+							  .replace(/(\d)(\d{4})$/,"$1-$2")
+		c.target.value = celularPattern;
+	  });
 
       document.getElementById('cpf').addEventListener('input', function(e) {
 		var value = e.target.value;
