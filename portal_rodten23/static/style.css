@@ -153,6 +153,18 @@ i.menu-mobile {
 
 @media (max-height:776px){
     #header {
+        background-position: 45% 130%;
+    }
+}
+
+@media (max-height:720px){
+    #header {
+        background-position: 45% 145%;
+    }
+}
+
+@media (max-height:690px){
+    #header {
         background-image: none;
     }
 }
@@ -160,7 +172,7 @@ i.menu-mobile {
 @media (max-width: 1024px) {
     #header {
         left: -300px;
-        background-image: none;
+        background-position: 45% 130%;
     }
     i.menu-mobile {
         display: flex;
@@ -273,13 +285,11 @@ i.menu-mobile {
     margin-right: 5px;
 }
 
-
 #sobre .livros{
     margin-bottom: 0px;
     margin-left: 6px;
     margin-right: 6px;
 }
-
 
 #sobre .id-card{
     margin-bottom: 0px;
@@ -382,6 +392,15 @@ i.menu-mobile {
 }
 
 @media (max-width: 1012px) {
+    #footer {
+        position: static;
+        width: auto;
+        padding: 15px 15px;
+        background-color: #000017;
+    }
+}
+
+@media (max-height: 690px) {
     #footer {
         position: static;
         width: auto;
