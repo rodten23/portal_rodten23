@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple widget usage</title>
+    <script src="https://cdn-public-library.clicksign.com/embedded/embedded.min-1.0.0.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div>
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome..." required>
+    </div>
+
+    <div>
+        <label for="celular" class="form-label">Celular:</label>
+        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite seu nome..." required>
+    </div>
+
+    <div>
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail..." required>
+    </div>
+                                
+    <div>
+        <label for="cpf" class="form-label">CPF:</label>
+        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF..." required>
+    </div>
+                                
+    <div class="col-12 d-flex justify-content-center mt-5">
+        <button id="btn-enviar" type="submit" class="btn btn-primary">Enviar mensagem</button>
+    </div>
+
+    <input id='request_signature_key' />
+    <input type='button' value='Load' onclick='run()'/>
+    <div id='container' style='height: 600px'></div>
+
+    <script type='text/javascript'>
+
+      document.getElementById('cpf').addEventListener('input', function(e) {
+		var value = e.target.value;
+		var cpfPattern = value.replace(/\D/g, '')
+							  .replace(/(\d{3})(\d)/, '$1.$2')
+							  .replace(/(\d{3})(\d)/, '$1.$2')
+							  .replace(/(\d{3})(\d)/, '$1-$2')
+							  .replace(/(-\d{2})\d+?$/, '$1');
+		e.target.value = cpfPattern;
+	  });
+
+      var widget,
+          input = document.getElementById('request_signature_key');
+
+      function run () {
+        var request_signature_key = input.value;
+
+        if(widget) { widget.unmount(); }
+
+        widget = new Clicksign(request_signature_key);
+
+        widget.endpoint = 'https://sandbox.clicksign.com';
+        widget.origin = window.origin;
+        widget.mount('container');
+
+        widget.on('loaded', function(ev) { console.log('loaded!'); });
+        widget.on('signed', function(ev) { console.log('signed!'); });
+        widget.on('resized', function(height) {
+          console.log('resized!');
+          document.getElementById('container').style.height = height+'px';
+        });
+      };
+    </script>
+  </body>
+</html>

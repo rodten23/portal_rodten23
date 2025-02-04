@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from datetime import date
 from portal_rodten23.calculo_idade import calcular_idade
 import os
+import requests
+import json
 load_dotenv()
 
 app = Flask(__name__)
@@ -66,6 +68,12 @@ def send():
         flash('Mensagem enviada com sucesso!')
     
     return redirect('/')
+
+@app.route('/contract', methods=['GET', 'POST'])
+def receber_webhook():
+#     dicionario = requests.json()
+#     dicionario2 = json.dump()
+    return render_template('contract.html')
 
 
 if __name__ == '__main__':
