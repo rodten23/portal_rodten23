@@ -210,15 +210,31 @@ i.menu-mobile {
 .cv .cv-title {
     font-weight: 700;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: #050d18;
 }
 
 .cv .cv-item {
+    top: 9px;
     padding: 0 0 20px 20px;
-    margin-top: -2px;
     border-left: 2px solid #1f5297;
     position: relative;
+}
+
+.cv .cv-cert {
+    top: 9px;
+    padding: 0 0 20px 20px;
+    border-left: transparent;
+    position: relative;
+}
+
+.cv .cv-cert h4 {
+    line-height: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: #050d18;
+    margin-bottom: 10px;
 }
 
 .cv .cv-item h4 {
@@ -230,18 +246,23 @@ i.menu-mobile {
     margin-bottom: 10px;
 }
 
-.cv .cv-item h5 {
-    background: #e4edf9;
-    padding: 5px 15px;
+.cv .cv-cert h6 {
     display: inline-block;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
+.cv .cv-item h6 {
+    background: #e4edf9;
+    padding: 5px 4px;
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
 .cv .cv-item::before {
     content: "";
     position: absolute;
-    top: 0;
     left: -9px;
     width: 16px;
     height: 16px;
