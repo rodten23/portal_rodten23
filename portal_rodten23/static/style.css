@@ -229,7 +229,7 @@ i.menu-mobile {
 }
 
 .cv .cv-cert h4 {
-    line-height: 18px;
+    line-height: normal;
     font-weight: 600;
     text-transform: uppercase;
     font-family: "Poppins", sans-serif;
@@ -238,7 +238,7 @@ i.menu-mobile {
 }
 
 .cv .cv-item h4 {
-    line-height: 18px;
+    line-height: 20px;
     font-weight: 600;
     text-transform: uppercase;
     font-family: "Poppins", sans-serif;
