@@ -219,6 +219,7 @@ i.menu-mobile {
     padding: 0 0 20px 20px;
     border-left: 2px solid #1f5297;
     position: relative;
+    list-style-type: disc;
 }
 
 .cv .cv-cert {
