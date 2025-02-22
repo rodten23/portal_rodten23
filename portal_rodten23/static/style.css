@@ -207,6 +207,24 @@ i.menu-mobile {
     background-color: #eff5ff;
 }
 
+.section-bg .hb-title {
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #050d18;
+}
+
+.logo {
+    margin-bottom: 23px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    width: auto;
+    align-items: center;
+}
+
 .cv .cv-title {
     font-weight: 700;
     margin-top: 20px;
@@ -320,7 +338,6 @@ i.menu-mobile {
 #sobre .rocket{
     margin-top: 3px;
     margin-bottom: 4px;
-
 }
 
 #sobre .unity{
