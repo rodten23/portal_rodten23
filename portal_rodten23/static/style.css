@@ -214,6 +214,17 @@ i.menu-mobile {
     color: #050d18;
 }
 
+.logo {
+    margin-bottom: 23px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    width: auto;
+    align-items: center;
+}
+
 .cv .cv-title {
     font-weight: 700;
     margin-top: 20px;
