@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 html, body {
     font-family: Ubuntu, Arial;
     width: 100%;
@@ -210,7 +212,7 @@ i.menu-mobile {
 .section-bg .hb-title {
     font-weight: 700;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     color: #050d18;
 }
 
@@ -223,6 +225,16 @@ i.menu-mobile {
 .logo img {
     width: auto;
     align-items: center;
+}
+
+.comportamentais h2 {
+    line-height: normal;
+    text-align: center;
+    font-weight: 400;
+    font-family: "Kaushan Script", sans-serif;
+    font-style: normal;
+    color: #050d18;
+    margin-bottom: 45px;
 }
 
 .cv .cv-title {
