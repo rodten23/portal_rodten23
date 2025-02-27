@@ -237,6 +237,21 @@ i.menu-mobile {
     margin-bottom: 45px;
 }
 
+.idiomas h4 {
+    line-height: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: #050d18;
+    margin-bottom: 10px;
+}
+
+.idiomas h6 {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
 .cv .cv-title {
     font-weight: 700;
     margin-top: 20px;
