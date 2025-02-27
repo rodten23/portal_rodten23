@@ -212,12 +212,12 @@ i.menu-mobile {
 .section-bg .hb-title {
     font-weight: 700;
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
     color: #050d18;
 }
 
 .logo {
-    margin-bottom: 23px;
+    margin-bottom: 18px;
     display: flex;
     justify-content: center;
 }
@@ -235,6 +235,12 @@ i.menu-mobile {
     font-style: normal;
     color: #050d18;
     margin-bottom: 45px;
+}
+
+.idiomas {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 23px;
 }
 
 .idiomas h4 {
