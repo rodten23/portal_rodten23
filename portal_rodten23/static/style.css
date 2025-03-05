@@ -280,6 +280,10 @@ i.menu-mobile {
     position: relative;
 }
 
+.cv-badge img {
+    height: 105px;
+}
+
 .cv .cv-cert h4 {
     line-height: normal;
     font-weight: 600;
