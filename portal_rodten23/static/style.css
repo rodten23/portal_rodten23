@@ -265,6 +265,21 @@ i.menu-mobile {
     color: #050d18;
 }
 
+.accordion-button {
+    --bs-accordion-btn-padding-x: 20px 10px;
+    background-color: #e4edf9;
+    --bs-accordion-active-bg: #e4edf9;
+    color: #050d18;
+}
+
+.accordion-button-title {
+    font-weight: 700;
+}
+
+.accordion-body {
+    padding: 0px;
+}
+
 .cv .cv-item {
     top: 9px;
     padding: 0 0 20px 20px;
