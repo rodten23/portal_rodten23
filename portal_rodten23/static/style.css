@@ -27,8 +27,8 @@ html, body {
 #header .profile img {
     margin: 15px auto;
     display: block;
-    width: 120px;
-    border: 8px solid #555970;
+    width: 110px;
+    border: 6px solid #555970;
     border-radius: 50%;
 }
 
