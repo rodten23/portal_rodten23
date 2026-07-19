@@ -91,6 +91,11 @@ html, body {
     color: #149ddd;
 }
 
+.nav-menu .nav-link.active {
+    color: #149ddd;
+
+}
+
 #main {
     margin-left: 300px;
 }
