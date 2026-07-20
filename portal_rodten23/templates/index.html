@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>Rodrigo Alves Tenório</title>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="50" tabindex="0">
 
     <i class="bi bi-list menu-mobile"></i>
 
     <aside id="header">
         <section class="profile">
-            <img src="../static/img/rodrigo_perfil.jpg" alt="Foto do Rodrigo">
+            <a href="#sobre">
+                <img src="../static/img/rodrigo_perfil.jpg" alt="Foto do Rodrigo">
+            </a>
 
             <h1>RodTen23</h1>
 
@@ -37,7 +39,7 @@
 
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#inicio">
+                    <a class="nav-link" href="#inicio">
                         <i class="bi bi-house"></i> Início</a>
                 </li>
                 <li class="nav-item">
@@ -74,7 +76,7 @@
         <section class="row m-0 p-0" id="inicio">
             <div class="col-mt-5 d-flex justify-content-end flex-column">
                 <h2 class="text-white text-shadow">Rodrigo Alves Tenório</h2>
-                <span id="subtitle" class="text-white text-shadow">Arquiteto de Soluções, Gerente de Projetos e Desenvolvedor</span>
+                <h3 id="subtitle" class="text-white text-shadow">Arquiteto de Soluções, Gerente de Projetos e Desenvolvedor</h3>
             </div>
             
             <div class="col-mt-7 d-flex justify-content-end align-items-end">
@@ -101,12 +103,12 @@
                     <div class="col-md-9" data-anime="right">
                         <h3 class="cargo">Arquiteto de Soluções e Gerente de Projetos</h3>
                         <h6>Desde 2023 atuo como arquiteto de soluções na Vivo/Telefôncia Brasil em seus canais digitais, assumindo também o papel de gerente de projetos em algumas demandas.</h6><br>
-                        <p>Nesta posição, lido diariamente com time de Negócios/Produtos, <i>Squads</i> de desenvolvimento, Arquitetura Corporativa, times de Fraudes e Segurança Digital, além de outros <i>stakeholders</i> e times técnicos. Também participo de reuniões com lideranças, reportanto status, dando apoio técnico e apresentando soluções e demandas.</p>
+                        <p>Nesta posição, lido diariamente com time de Negócios/Produtos, <i>Squads</i> de desenvolvimento, Arquitetura Corporativa, times de Fraudes e Segurança Digital, além de outros <i>Stakeholders</i> e times técnicos. Também participo de reuniões com lideranças, reportanto status, dando apoio técnico e apresentando soluções e demandas.</p>
                         <p>Entre as minhas tarefas, vale destacar:</p>
                         <ul>
-                            <li>Escrita, desenho e organização de documentação técnica;</li>
+                            <li>Escrita, desenho, validação e organização de documentações técnicas;</li>
                             <li>Reporte e acompanhamento de status de projetos e tarefas;</li>
-                            <li>Liderança técnica e apoio a outros times e <i>squads</i> de desenvolvimento;</li>
+                            <li>Liderança técnica e apoio a outros times e <i>Squads</i> de desenvolvimento;</li>
                             <li>Definição de soluções técnicas e APIs, além de suporte em testes;</li>
                             <li>Criação de relatórios e apresentação de projetos;</li>
                             <li>Apoio na definição de requisitos funcionais e experiência do cliente.</li>
@@ -510,21 +512,15 @@
                             <h4>Analista de Inovação Digital</h4>
                             <h6>Vivo (Telefônica Brasil)</h6>
                             <p><em>Jan / 2023 - atual</em></p>
-                            <p>Iniciei cargo de Arquiteto de Soluções (nível Pleno), indo atuar no squad de Maturidade técnica, recebendo as demandas priorizadas pela área de Negócios e apoiando Team Lead em suas atividades.</p>
-                            <p>Minhas principais atividades são:</p>
-                                <ul>
-                                    <li>apresentar e participar de agendas com times de TI e de Negócios;</li>
-                                    <li>escrever, desenhar, revisar e validar documentações técnicas e apresentações;</li>
-                                    <li>testar sistemas;</li>
-                                    <li>fazer passagem de projetos e apoiar os squads de desenvolvimento;</li>
-                                    <li>apoiar o time de Maturidade com relatórios e comunicações as outras áreas e aos executivos.</li>
-                                </ul>
+                            <p>Iniciei no cargo de Arquiteto de Soluções (nível Pleno), indo atuar no <i>Squad</i> de Maturidade Técnica, ao mesmo tempo que apoiava minha Team Lead em suas atividades, o que permitiu adquirir experiência como Gerente de Projetos, entender melhor a dinâmica da área e alinhar expectativas com nossa liderança.</p>
+                            <p>Em Mai/2025 fui promovido ao nível Senior e, a partir disso, passei a focar exclusivamente na carreira de Arquiteto de Soluções. </p>
+                            <p>Minhas principais atividades estão listadas na seção <a href="#sobre">Sobre</a>.</p>
                         </div>
 
                         <div class="cv-item" data-anime="up">
                             <h4>Estagiário em TI</h4>
                             <p><em>Abr - Dez / 2022</em></p>
-                            <p>Em março/2022 fui aprovado para o programa de estágio da Vivo, sendo selecionado para atuar no time de estagiários da área de E-care da TI B2B.</p>
+                            <p>Em Mar/2022 fui aprovado para o programa de estágio da Vivo, sendo selecionado para atuar no time de estagiários da área de E-care da TI B2B.</p>
                             <p>Minhas atividades durante estágio eram:</p>
                                 <ul>
                                     <li>apresentar e participar de agendas com times de TI;</li>
@@ -533,7 +529,7 @@
                                     <li>fazer análise de logs e montar relatórios;</li>
                                     <li>apoiar os outros estagiários em suas atividades.</li>
                                 </ul>
-                            <p>Em dezembro/2022, ainda durante período de estágio, fui contratado como Arquiteto de Soluções em nível Pleno, para atuar na mesma área da TI da Vivo.</p>
+                            <p>Em Dez/2022, ainda durante período de estágio, fui contratado como Arquiteto de Soluções em nível Pleno, para atuar na mesma área da TI da Vivo.</p>
                         </div>
 
                     </div>
@@ -702,16 +698,13 @@
 
                                 <div class="col">
                                     <div class="card">
-                                        <img src="../static/img/blog-pessoal.png" class="card-img-top img-fluid w-100" alt="print do blog">
+                                        <img src="../static/img/Lab_IA_ClassificacaoImagens.png" class="card-img-top img-fluid w-100" alt="print do blog">
                                         <div class="card-body">
-                                            <h5 class="card-title">Blog Pessoal</h5>
-                                            <p class="card-text">Projeto backend criado com Python e usando Microsoft Azure...</p>
+                                            <h5 class="card-title">Laboratório para certificação AI-900</h5>
+                                            <p class="card-text">Adaptação de laboratório da Microsoft sobre Visão Computacional para demonstração aos alunos.</p>
                                             <div class="d-flex justify-content-center">
-                                                <a href="https://github.com/rodten23/portal_rodten23" target="_blank" class="btn btn-outline-dark me-3">
+                                                <a href="https://github.com/rodten23/Laboratorios_MicrosoftAzure_AI900" target="_blank" class="btn btn-outline-dark me-3">
                                                     <i class="bi bi-github"></i>
-                                                </a>
-                                                <a href="https://wordpress.com/pt-br/" target="_blank" class="btn btn-outline-primary">
-                                                    <i class="bi bi-link-45deg"></i>
                                                 </a>
                                             </div>
                                         </div>

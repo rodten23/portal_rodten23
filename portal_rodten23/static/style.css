@@ -27,8 +27,8 @@ html, body {
 #header .profile img {
     margin: 15px auto;
     display: block;
-    width: 120px;
-    border: 8px solid #555970;
+    width: 110px;
+    border: 6px solid #555970;
     border-radius: 50%;
 }
 
@@ -91,6 +91,11 @@ html, body {
     color: #149ddd;
 }
 
+.nav-menu .nav-link.active {
+    color: #149ddd;
+
+}
+
 #main {
     margin-left: 300px;
 }
@@ -110,9 +115,9 @@ section#inicio h2 {
     font-size: 4.5rem;
 }
 
-section#inicio span#subtitle {
-    margin-left: 2rem;
-    font-size: 1.5rem;
+section#inicio h3 {
+    margin-left: 2.3rem;
+    font-size: 1.8rem;
 }
 
 .text-shadow {
@@ -371,7 +376,7 @@ i.menu-mobile {
     margin-bottom: 0px;
 }
 
-#sobre .sou_de{
+#sobre .estou_em{
     margin-bottom: 0px;
     margin-left: 4px;
     margin-right: 5px;
