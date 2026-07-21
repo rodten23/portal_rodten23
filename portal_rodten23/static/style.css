@@ -301,10 +301,10 @@ i.menu-mobile {
 }
 
 .cv-badge img {
-    height: 105px;
+    height: 90px;
 }
 
-.cv .cv-cert h4 {
+.cv .cv-cert h5 {
     line-height: normal;
     font-weight: 600;
     text-transform: uppercase;
