@@ -364,7 +364,8 @@ i.menu-mobile {
   border-bottom-color: #ced0db;
 }
 
-#sobre img {
+#sobre .foto-sobre {
+    width: 215px;
     margin-bottom: 30px;
 }
 
