@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple widget usage</title>
-    <script src="https://cdn-public-library.clicksign.com/embedded/embedded.min-1.0.0.js" type="text/javascript"></script>
-  </head>
+    <title>Contrato Teste</title>
+    <script src="https://cdn-public-library.clicksign.com/embedded/embedded.min-2.1.0.js" type="text/javascript"></script>
+</head>
 
-  <body>
+<body>
     <div>
-        <label for="nome" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome..." required>
+        <label for="enterprise" class="form-label">Nome da empresa:</label>
+        <input type="text" class="form-control" id="enterprise" name="enterprise" placeholder="Digite o nome da empresa..." required>
     </div>
 
     <div>
-        <label for="celular" class="form-label">Celular:</label>
-        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite seu celular..." maxlength="13" required>
+        <label for="name" class="form-label">Nome do cliente:</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do contratante..." required>
     </div>
 
     <div>
-        <label for="email" class="form-label">E-mail:</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail..." required>
+        <label for="celular" class="form-label">Celular do cliente:</label>
+        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite o celular do contratante..." maxlength="13" required>
+    </div>
+
+    <div>
+        <label for="email" class="form-label">E-mail doe cliente:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail do contratante..." required>
     </div>
                                 
     <div>
-        <label for="cpf" class="form-label">CPF:</label>
-        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF..." required>
+        <label for="cpf" class="form-label">CPF do cliente:</label>
+        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF do contratante..." required>
     </div>
                                 
     <div class="col-12 d-flex justify-content-center mt-5">
@@ -39,44 +44,43 @@
     <script type='text/javascript'>
 
       document.getElementById('celular').addEventListener('input', function(c) {
-		var value = c.target.value;
-		var celularPattern = value.replace(/\D/g, '')
+		        var value = c.target.value;
+		        var celularPattern = value.replace(/\D/g, '')
 							  .replace(/^(\d{2})(\d)/g, "$1 $2")
 							  .replace(/(\d)(\d{4})$/,"$1-$2")
-		c.target.value = celularPattern;
-	  });
+		        c.target.value = celularPattern;
+	      });
 
-      document.getElementById('cpf').addEventListener('input', function(e) {
-		var value = e.target.value;
-		var cpfPattern = value.replace(/\D/g, '')
+        document.getElementById('cpf').addEventListener('input', function(e) {
+		        var value = e.target.value;
+		        var cpfPattern = value.replace(/\D/g, '')
 							  .replace(/(\d{3})(\d)/, '$1.$2')
 							  .replace(/(\d{3})(\d)/, '$1.$2')
 							  .replace(/(\d{3})(\d)/, '$1-$2')
 							  .replace(/(-\d{2})\d+?$/, '$1');
-		e.target.value = cpfPattern;
-	  });
+		        e.target.value = cpfPattern;
+	      });
 
-      var widget,
-          input = document.getElementById('request_signature_key');
+        var widget, input = document.getElementById('request_signature_key');
 
-      function run () {
-        var request_signature_key = input.value;
+        function run () {
+            var request_signature_key = input.value;
 
-        if(widget) { widget.unmount(); }
+            if(widget) { widget.unmount(); }
 
-        widget = new Clicksign(request_signature_key);
+            widget = new Clicksign(request_signature_key);
 
-        widget.endpoint = 'https://sandbox.clicksign.com';
-        widget.origin = window.origin;
-        widget.mount('container');
+            widget.endpoint = 'https://sandbox.clicksign.com';
+            widget.origin = window.origin;
+            widget.mount('container');
 
-        widget.on('loaded', function(ev) { console.log('loaded!'); });
-        widget.on('signed', function(ev) { console.log('signed!'); });
-        widget.on('resized', function(height) {
-          console.log('resized!');
-          document.getElementById('container').style.height = height+'px';
-        });
-      };
+            widget.on('loaded', function(event) { console.log('Widget carregado!'); });
+            widget.on('signed', function(event) { console.log('Documento assinado!'); });
+            widget.on('resized', function(event) {
+                console.log('resized!');
+                document.getElementById('container').style.height = event.data.height + 'px';
+            });
+        };
     </script>
-  </body>
+</body>
 </html>
