@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 html, body {
     font-family: Ubuntu, Arial;
     width: 100%;
@@ -25,8 +27,8 @@ html, body {
 #header .profile img {
     margin: 15px auto;
     display: block;
-    width: 120px;
-    border: 8px solid #555970;
+    width: 110px;
+    border: 6px solid #555970;
     border-radius: 50%;
 }
 
@@ -89,6 +91,11 @@ html, body {
     color: #149ddd;
 }
 
+.nav-menu .nav-link.active {
+    color: #149ddd;
+
+}
+
 #main {
     margin-left: 300px;
 }
@@ -108,9 +115,9 @@ section#inicio h2 {
     font-size: 4.5rem;
 }
 
-section#inicio span#subtitle {
-    margin-left: 2rem;
-    font-size: 1.5rem;
+section#inicio h3 {
+    margin-left: 2.3rem;
+    font-size: 1.8rem;
 }
 
 .text-shadow {
@@ -153,6 +160,18 @@ i.menu-mobile {
 
 @media (max-height:776px){
     #header {
+        background-position: 45% 130%;
+    }
+}
+
+@media (max-height:720px){
+    #header {
+        background-position: 45% 145%;
+    }
+}
+
+@media (max-height:690px){
+    #header {
         background-image: none;
     }
 }
@@ -160,7 +179,7 @@ i.menu-mobile {
 @media (max-width: 1024px) {
     #header {
         left: -300px;
-        background-image: none;
+        background-position: 45% 130%;
     }
     i.menu-mobile {
         display: flex;
@@ -174,6 +193,15 @@ i.menu-mobile {
     }
     #main {
         margin-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    section#sobre {
+        .list-group-flush.group-1 {
+            border-bottom: 1.5px solid var(--bs-border-color, #ced0db);
+
+        }
     }
 }
 
@@ -195,22 +223,42 @@ i.menu-mobile {
     background-color: #eff5ff;
 }
 
-.cv .cv-title {
+.section-bg .hb-title {
     font-weight: 700;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
     color: #050d18;
 }
 
-.cv .cv-item {
-    padding: 0 0 20px 20px;
-    margin-top: -2px;
-    border-left: 2px solid #1f5297;
-    position: relative;
+.logo {
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: center;
 }
 
-.cv .cv-item h4 {
-    line-height: 18px;
+.logo img {
+    width: auto;
+    align-items: center;
+}
+
+.comportamentais h2 {
+    line-height: normal;
+    text-align: center;
+    font-weight: 400;
+    font-family: "Kaushan Script", sans-serif;
+    font-style: normal;
+    color: #050d18;
+    margin-bottom: 45px;
+}
+
+.idiomas {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 23px;
+}
+
+.idiomas h5 {
+    line-height: normal;
     font-weight: 600;
     text-transform: uppercase;
     font-family: "Poppins", sans-serif;
@@ -218,18 +266,88 @@ i.menu-mobile {
     margin-bottom: 10px;
 }
 
-.cv .cv-item h5 {
-    background: #e4edf9;
-    padding: 5px 15px;
+.idiomas h6 {
     display: inline-block;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
+.cv .cv-title {
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #050d18;
+}
+
+.accordion-button {
+    --bs-accordion-btn-padding-x: 20px 10px;
+    background-color: #e4edf9;
+    --bs-accordion-active-bg: #e4edf9;
+    color: #050d18;
+}
+
+.accordion-button-title {
+    font-weight: 700;
+}
+
+.accordion-body {
+    padding: 0px;
+}
+
+.cv .cv-item {
+    top: 9px;
+    padding: 0 0 20px 20px;
+    border-left: 2px solid #1f5297;
+    position: relative;
+    list-style-type: disc;
+}
+
+.cv .cv-cert {
+    top: 9px;
+    padding: 0 0 20px 20px;
+    border-left: transparent;
+    position: relative;
+}
+
+.cv-badge img {
+    height: 90px;
+}
+
+.cv .cv-cert h5 {
+    line-height: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: #050d18;
+    margin-bottom: 10px;
+}
+
+.cv .cv-item h4 {
+    line-height: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: #050d18;
+    margin-bottom: 10px;
+}
+
+.cv .cv-cert h6 {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.cv .cv-item h6 {
+    background: #e4edf9;
+    padding: 5px 4px;
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
 .cv .cv-item::before {
     content: "";
     position: absolute;
-    top: 0;
     left: -9px;
     width: 16px;
     height: 16px;
@@ -255,7 +373,8 @@ i.menu-mobile {
   border-bottom-color: #ced0db;
 }
 
-#sobre img {
+#sobre .foto-sobre {
+    width: 215px;
     margin-bottom: 30px;
 }
 
@@ -267,19 +386,17 @@ i.menu-mobile {
     margin-bottom: 0px;
 }
 
-#sobre .sou_de{
+#sobre .estou_em{
     margin-bottom: 0px;
     margin-left: 4px;
     margin-right: 5px;
 }
-
 
 #sobre .livros{
     margin-bottom: 0px;
     margin-left: 6px;
     margin-right: 6px;
 }
-
 
 #sobre .id-card{
     margin-bottom: 0px;
@@ -288,7 +405,6 @@ i.menu-mobile {
 #sobre .rocket{
     margin-top: 3px;
     margin-bottom: 4px;
-
 }
 
 #sobre .unity{
@@ -382,6 +498,15 @@ i.menu-mobile {
 }
 
 @media (max-width: 1012px) {
+    #footer {
+        position: static;
+        width: auto;
+        padding: 15px 15px;
+        background-color: #000017;
+    }
+}
+
+@media (max-height: 690px) {
     #footer {
         position: static;
         width: auto;
