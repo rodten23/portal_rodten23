@@ -196,6 +196,15 @@ i.menu-mobile {
     }
 }
 
+@media (max-width: 767px) {
+    section#sobre {
+        .list-group-flush.group-1 {
+            border-bottom: 1.5px solid var(--bs-border-color, #ced0db);
+
+        }
+    }
+}
+
 *::-webkit-scrollbar {
     width: 12px;
 }
