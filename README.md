@@ -6,5 +6,5 @@ Ficarei muito feliz se o que estiver aqui for útil para você e ainda mais feli
 
 Aproveito para agradecer e parabenizar o Thiago pelo excelente trabalho e disposição para ajudar outros profissionais. :heart:
 
-https://www.youtube.com/@thicode.channel
+https://www.youtube.com/@thiago_veigah
 
