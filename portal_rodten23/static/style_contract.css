@@ -250,7 +250,7 @@ body {
 
 .form-check-label a:hover { text-decoration: underline; }
  
-Helper text
+/* Helper text */
 .form-text {
     font-size: .78rem;
     color: var(--muted);
