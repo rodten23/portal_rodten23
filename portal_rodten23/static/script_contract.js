@@ -10,12 +10,22 @@ form.addEventListener('submit', (e) => {
  
     // Email
     if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-      email.classList.add('is-invalid');
-      email.classList.remove('is-valid');
-      valid = false;
+        email.classList.add('is-invalid');
+        email.classList.remove('is-valid');
+        valid = false;
     } else {
-      email.classList.remove('is-invalid');
-      email.classList.add('is-valid');
+        email.classList.remove('is-invalid');
+        email.classList.add('is-valid');
+    }
+
+    // Terms
+    if (!terms.checked) {
+        terms.classList.add('is-invalid');
+        terms.classList.remove('is-valid');
+        valid = false;
+    } else {
+        terms.classList.remove('is-invalid');
+        terms.classList.add('is-valid');
     }
  
     if (!valid) return;
@@ -26,18 +36,18 @@ form.addEventListener('submit', (e) => {
     btn.disabled = true;
  
     setTimeout(() => {
-      btn.textContent = 'Tente novamente!';
-      btn.disabled = false;
-      form.reset();
-      email.classList.remove('is-valid');
- 
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+        btn.textContent = 'Tente novamente!';
+        btn.disabled = false;
+        form.reset();
+        email.classList.remove('is-valid');
+        email.classList.remove('is-invalid');
+        terms.classList.remove('is-valid');
+        terms.classList.remove('is-invalid');
     }, 1400);
 });
  
 // Remove invalid on input
-['emailInput'].forEach(id => {
+['emailInput', 'termsCheck'].forEach(id => {
     document.getElementById(id).addEventListener('input', function () {
         this.classList.remove('is-invalid');
     });

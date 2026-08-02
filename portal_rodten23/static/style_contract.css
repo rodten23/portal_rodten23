@@ -205,22 +205,6 @@ body {
     padding-left: 2.5rem;
 }
  
-    /* Password toggle */
-    /* .toggle-pw {
-      position: absolute;
-      right: .85rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 0;
-      line-height: 1;
-      transition: color .15s;
-    } */
-    /* .toggle-pw:hover { color: var(--text); } */
- 
 /* Checkbox */
 .form-check {
     display: flex;
@@ -266,7 +250,7 @@ body {
 
 .form-check-label a:hover { text-decoration: underline; }
  
-/* Helper text */
+Helper text
 .form-text {
     font-size: .78rem;
     color: var(--muted);
