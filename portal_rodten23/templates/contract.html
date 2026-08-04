@@ -153,7 +153,7 @@
                 <div class="contract-header">
                     <h1>Contrato Teste na Clicksign</h1><br>
                     <p>Contrato para teste criado em ambiente de testes <i>(sandbox)</i> da Clicksign.<br>
-                        Link para documentação oficial: </p>
+                        Link para documentação oficial: <a href="https://developers.clicksign.com/v3.0/docs/introducao-a-documentacao" target="_blank" >https://developers.clicksign.com/v3.0/docs/introducao-a-documentacao</a></p>
                 </div>
 
                 <hr class="divider"/>
@@ -173,9 +173,40 @@
 
                     <input id='request_signature_key' />
                     <input type='button' value='Load' onclick='run()'/>
-                    <div id='container' style='height: 600px'></div>
+                    <div id='container' style='height: 600px'>
 
-                    <script type='text/javascript'>
+                        <script type="text/javascript">
+                            var widget = new Clicksign('abdc3d0a-688d-47f3-9f5d-8d36db29acff');
+
+                            // Defina o endpoint apropriado (Sandbox ou Produção)
+                            widget.endpoint = 'https://sandbox.clicksign.com'; // Ou 'https://app.clicksign.com'
+
+                            // (Opcional) Defina a URL de origem se estiver usando WebView
+                            widget.origin = window.origin;
+
+                            // Renderize o widget dentro do container
+                            widget.mount('container');
+
+                            // (Opcional) Adicione callbacks para eventos
+                            widget.on('loaded', function(event) {
+                                console.log('Widget carregado!');
+                            });
+
+                            widget.on('signed', function(event) {
+                                console.log('Documento assinado!');
+                                // Redirecione o usuário ou execute alguma ação
+                                // window.location.href = '/obrigado';
+                            });
+
+                            widget.on('resized', function(event) {
+                                console.log('Widget redimensionado:', event.data.height);
+                                document.getElementById('container').style.height = event.data.height + 'px';
+                            });
+                        </script>
+
+                    </div>
+
+                    <!-- <script type='text/javascript'>
 
                     document.getElementById('celular').addEventListener('input', function(c) {
                                 var value = c.target.value;
@@ -215,7 +246,7 @@
                                 document.getElementById('container').style.height = event.data.height + 'px';
                             });
                         };
-                    </script>
+                    </script> -->
                 </div>
             </div>
         </div>
