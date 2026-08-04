@@ -1,82 +1,264 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple widget usage</title>
-    <script src="https://cdn-public-library.clicksign.com/embedded/embedded.min-1.0.0.js" type="text/javascript"></script>
-  </head>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/style_contract.css">
+    <link rel="icon" type="image/png" href="../static/img/rodrigo_favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Contrato Teste</title>
+    <script src="https://cdn-public-library.clicksign.com/embedded/embedded.min-2.1.0.js" type="text/javascript"></script>
+</head>
 
-  <body>
-    <div>
-        <label for="nome" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome..." required>
+<body>
+
+    <div class="container-fluid px-1">
+    <div class="row w-100">
+
+    <div class="row">
+
+    <section class="col-md-3" id="form">
+        
+        <div class="form-card-wrap">
+            <div class="form-card">
+    
+                <div class="form-header">
+                    <span class="badge">Apenas algumas das opções possíveis</span>
+                    <h1>Crie um Contrato Teste</h1><br>
+                    <p>Não precisa incluir seus dados reais.<br>
+                        Usaremos com nossos dados fictícios.<br><br>Basta incluir um e-mail ao qual tenha acesso, pois lhe enviaremos um Token OTP para concluir assinatura deste contrato teste.<br><br>O e-mail e outros dados que você decidir incluir serão enviados apenas para a Clicksign.</p>
+                </div>
+    
+                <form id="contractForm" novalidate>
+    
+                    <!-- Email de quem assinará -->
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Endereço de E-mail <a style="color: #149ddd">(obrigatório)</a></label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="bi bi-envelope"></i></span>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="emailInput"
+                                placeholder="E-mail que receberá Token OTP"
+                                autocomplete="email"
+                                maxlength="45"
+                                required
+                            />
+                            <div class="invalid-feedback">Digite um e-mail no formato texto@texto.texto</div>
+                        </div>
+                    </div>
+
+                    <!-- <div>
+                        <label for="name" class="form-label">Nome do cliente:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do contratante..." required>
+                    </div> -->
+
+                    <!-- Nome de quem assinará -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome do contratante fictício</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="bi bi-person"></i></span>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="person-name"
+                                placeholder="Digite o nome do contratante"
+                                maxlength="45"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- <div>
+                        <label for="cpf" class="form-label">CPF do cliente:</label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF do contratante..." required>
+                    </div> -->
+
+
+                    <!-- CPF de quem assinará -->
+                    <div class="mb-3">
+                        <label for="cpf" class="form-label">CPF do contratante fictício</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="bi bi-person-vcard"></i></span>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="cpf"
+                                placeholder="Digite o CPF do contratante"
+                                maxlength="14"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- <div>
+                        <label for="enterprise" class="form-label">Nome da empresa:</label>
+                        <input type="text" class="form-control" id="enterprise" name="enterprise" placeholder="Digite o nome da empresa..." required>
+                    </div> -->
+
+
+                    <!-- Nome da empresa contratada -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome da empresa fictícia</label>
+                        <div class="input-wrap">
+                            <span class="icon"><i class="bi bi-shop"></i></span>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="enterprise-name"
+                                placeholder="Digite o nome da empresa contratada"
+                                maxlength="45"
+                            />
+                        </div>
+                    </div>
+    
+                    <hr class="divider"/>
+    
+                    <!-- Checkbox -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="termsCheck"
+                                required
+                            />
+                            <label class="form-check-label" for="termsCheck">
+                                Ao continuar, você aceita os <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>
+                            </label>
+                            <div class="invalid-feedback">Necessário aceitar os termos.</div>
+                        </div>
+                    </div>
+    
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        Criar Contrato Teste
+                    </button>
+    
+                </form>
+
+                <script src="../static/script_contract.js" type="text/javascript"></script>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="col-md-9 gy-4 gy-md-0" id="contract">
+
+        <div class="contract-card-wrap">
+            <div class="contract-card">
+
+                <div class="contract-header">
+                    <h1>Contrato Teste na Clicksign</h1>
+                    <p>Contrato para teste criado em ambiente de testes <i>(sandbox)</i> da Clicksign.<br>
+                        Link para documentação oficial: <a href="https://developers.clicksign.com/v3.0/docs/introducao-a-documentacao" target="_blank" >https://developers.clicksign.com/v3.0/docs/introducao-a-documentacao</a></p>
+                </div>
+
+                <hr class="divider"/>
+
+                <div class="widget">
+                    
+
+                    <!-- <div>
+                        <label for="celular" class="form-label">Celular do cliente:</label>
+                        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite o celular do contratante..." maxlength="13" required>
+                    </div> -->
+                                            
+                                                
+                    <!-- <div class="col-12 d-flex justify-content-center mt-5">
+                        <button id="btn-enviar" type="submit" class="btn btn-primary">Assinar Contrato</button>
+                    </div> -->
+
+                    <!-- <input id='request_signature_key' />
+                    <input type='button' value='Load' onclick='run()'/> -->
+                    <div id='container' style='height: 600px'>
+
+                        <script type="text/javascript">
+                            var widget = new Clicksign('abdc3d0a-688d-47f3-9f5d-8d36db29acff');
+
+                            // Defina o endpoint apropriado (Sandbox ou Produção)
+                            widget.endpoint = 'https://sandbox.clicksign.com'; // Ou 'https://app.clicksign.com'
+
+                            // (Opcional) Defina a URL de origem se estiver usando WebView
+                            widget.origin = window.origin;
+
+                            // Renderize o widget dentro do container
+                            widget.mount('container');
+
+                            // (Opcional) Adicione callbacks para eventos
+                            widget.on('loaded', function(event) {
+                                console.log('Widget carregado!');
+                            });
+
+                            widget.on('signed', function(event) {
+                                console.log('Documento assinado!');
+                                // Redirecione o usuário ou execute alguma ação
+                                // window.location.href = '/obrigado';
+                            });
+
+                            widget.on('resized', function(event) {
+                                console.log('Widget redimensionado:', event.data.height);
+                                document.getElementById('container').style.height = event.data.height + 'px';
+                            });
+                        </script>
+
+                    </div>
+
+                    <!-- <script type='text/javascript'>
+
+                    document.getElementById('celular').addEventListener('input', function(c) {
+                                var value = c.target.value;
+                                var celularPattern = value.replace(/\D/g, '')
+                                            .replace(/^(\d{2})(\d)/g, "$1 $2")
+                                            .replace(/(\d)(\d{4})$/,"$1-$2")
+                                c.target.value = celularPattern;
+                        });
+
+                        document.getElementById('cpf').addEventListener('input', function(e) {
+                                var value = e.target.value;
+                                var cpfPattern = value.replace(/\D/g, '')
+                                            .replace(/(\d{3})(\d)/, '$1.$2')
+                                            .replace(/(\d{3})(\d)/, '$1.$2')
+                                            .replace(/(\d{3})(\d)/, '$1-$2')
+                                            .replace(/(-\d{2})\d+?$/, '$1');
+                                e.target.value = cpfPattern;
+                        });
+
+                        var widget, input = document.getElementById('request_signature_key');
+
+                        function run () {
+                            var request_signature_key = input.value;
+
+                            if(widget) { widget.unmount(); }
+
+                            widget = new Clicksign(request_signature_key);
+
+                            widget.endpoint = 'https://sandbox.clicksign.com';
+                            widget.origin = window.origin;
+                            widget.mount('container');
+
+                            widget.on('loaded', function(event) { console.log('Widget carregado!'); });
+                            widget.on('signed', function(event) { console.log('Documento assinado!'); });
+                            widget.on('resized', function(event) {
+                                console.log('resized!');
+                                document.getElementById('container').style.height = event.data.height + 'px';
+                            });
+                        };
+                    </script> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
     </div>
-
-    <div>
-        <label for="celular" class="form-label">Celular:</label>
-        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite seu celular..." maxlength="13" required>
     </div>
-
-    <div>
-        <label for="email" class="form-label">E-mail:</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail..." required>
     </div>
-                                
-    <div>
-        <label for="cpf" class="form-label">CPF:</label>
-        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF..." required>
-    </div>
-                                
-    <div class="col-12 d-flex justify-content-center mt-5">
-        <button id="btn-enviar" type="submit" class="btn btn-primary">Enviar mensagem</button>
-    </div>
-
-    <input id='request_signature_key' />
-    <input type='button' value='Load' onclick='run()'/>
-    <div id='container' style='height: 600px'></div>
-
-    <script type='text/javascript'>
-
-      document.getElementById('celular').addEventListener('input', function(c) {
-		var value = c.target.value;
-		var celularPattern = value.replace(/\D/g, '')
-							  .replace(/^(\d{2})(\d)/g, "$1 $2")
-							  .replace(/(\d)(\d{4})$/,"$1-$2")
-		c.target.value = celularPattern;
-	  });
-
-      document.getElementById('cpf').addEventListener('input', function(e) {
-		var value = e.target.value;
-		var cpfPattern = value.replace(/\D/g, '')
-							  .replace(/(\d{3})(\d)/, '$1.$2')
-							  .replace(/(\d{3})(\d)/, '$1.$2')
-							  .replace(/(\d{3})(\d)/, '$1-$2')
-							  .replace(/(-\d{2})\d+?$/, '$1');
-		e.target.value = cpfPattern;
-	  });
-
-      var widget,
-          input = document.getElementById('request_signature_key');
-
-      function run () {
-        var request_signature_key = input.value;
-
-        if(widget) { widget.unmount(); }
-
-        widget = new Clicksign(request_signature_key);
-
-        widget.endpoint = 'https://sandbox.clicksign.com';
-        widget.origin = window.origin;
-        widget.mount('container');
-
-        widget.on('loaded', function(ev) { console.log('loaded!'); });
-        widget.on('signed', function(ev) { console.log('signed!'); });
-        widget.on('resized', function(height) {
-          console.log('resized!');
-          document.getElementById('container').style.height = height+'px';
-        });
-      };
-    </script>
-  </body>
+</div>
+</body>
 </html>
+
+
+
+<!-- <a href="https://www.magnific.com/free-vector/abstract-background-with-hexagonal-grid-design_413637058.htm#fromView=search&page=5&position=23&uuid=8e9a250a-be46-4787-9aee-c957c586a84e&query=Futuristic+hex+grid">Image by kjpargeter on Magnific</a> -->
