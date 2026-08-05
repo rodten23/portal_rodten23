@@ -8,7 +8,7 @@ from flask import Flask
 
 from portal_rodten23.contract_clicksign.contract_datetime import create_deadline
 
-contract = Flask(__name__)
+envelope = Flask(__name__)
 
 load_dotenv()
 
@@ -25,7 +25,7 @@ headers = {
 }
 
 
-@contract.post('/envelopes')
+@envelope.post('/envelopes')
 def create_envelope():
     create_envelope_url = f'{base_url}/envelopes'
 
