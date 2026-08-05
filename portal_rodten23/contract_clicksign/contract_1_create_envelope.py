@@ -6,6 +6,8 @@ import httpx
 from dotenv import load_dotenv
 from flask import Flask
 
+from portal_rodten23.contract_clicksign.contract_datetime import create_deadline
+
 contract = Flask(__name__)
 
 load_dotenv()
@@ -27,11 +29,6 @@ headers = {
 def create_envelope():
     create_envelope_url = f'{base_url}/envelopes'
 
-    current_date = dt.date.today()
-    zero_hour = dt.time(0, 0, 0, 0)
-    future_date = current_date + dt.timedelta(days=30)
-    deadline = f'{future_date}T{zero_hour}.000-03:00'
-
     body_envelope = json.dumps({
         'data': {
             'type': 'envelopes',
@@ -41,7 +38,7 @@ def create_envelope():
                 'auto_close': True,
                 'remind_interval': 3,
                 'block_after_refusal': True,
-                'deadline_at': deadline,
+                'deadline_at': create_deadline(),
             },
         }
     })
@@ -54,7 +51,9 @@ def create_envelope():
     )
 
     with open(
-        f'{base_url_response_json}response_envelope.json', 'w', encoding='utf-8',
+        f'{base_url_response_json}response_envelope.json',
+        'w',
+        encoding='utf-8',
     ) as response_file:
         json.dump(
             response_envelope.json(),
@@ -68,7 +67,9 @@ def create_envelope():
 
 def read_envelope():
     with open(
-        f'{base_url_response_json}response_envelope.json', 'r', encoding='utf-8',
+        f'{base_url_response_json}response_envelope.json',
+        'r',
+        encoding='utf-8',
     ) as open_file:
         data_envelope = json.load(open_file)
 
