@@ -1,4 +1,3 @@
-import datetime as dt
 import json
 import os
 
@@ -6,7 +5,9 @@ import httpx
 from dotenv import load_dotenv
 from flask import Flask
 
-from portal_rodten23.contract_clicksign.contract_datetime import create_deadline
+from portal_rodten23.contract_clicksign.contract_datetime import (
+    create_deadline,
+)
 
 envelope = Flask(__name__)
 
@@ -14,7 +15,6 @@ load_dotenv()
 
 base_url = os.getenv('BASE_URL')
 access_token = os.getenv('ACCESS_TOKEN')
-template_id = os.getenv('TEMPLATE_ID')
 
 base_url_response_json = './portal_rodten23/contract_clicksign/'
 
@@ -38,7 +38,7 @@ def create_envelope():
                 'auto_close': True,
                 'remind_interval': 3,
                 'block_after_refusal': True,
-                'deadline_at': create_deadline(),
+                'deadline_at': create_deadline()['deadline'],
             },
         }
     })
