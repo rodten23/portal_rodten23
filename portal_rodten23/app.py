@@ -68,7 +68,7 @@ def send():
     
     return redirect('/')
 
-@app.route('/contract', methods=['GET', 'POST'])
+@app.route('/contract')
 def contract():
 
     return render_template('contract.html')

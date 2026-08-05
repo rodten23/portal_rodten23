@@ -8,9 +8,10 @@ import datetime as dt
 import httpx
 from dotenv import load_dotenv
 
-from fastapi import FastAPI, Depends
+from flask import Flask
 
-app = FastAPI()
+
+contract = Flask(__name__)
 
 load_dotenv()
 
@@ -24,7 +25,7 @@ headers = {
     'Accept': 'application/json'
 }
 
-@app.get('/conta')
+@contract.get('/conta')
 def testar_conta():
 
     testar_conta_url = f'{base_url}/envelopes?access_token={access_token}'
@@ -53,7 +54,7 @@ def testar_conta():
     return chave_conta
 
 
-@app.post('/envelopes')
+@contract.post('/envelopes')
 def criar_envelope():
 
     criar_envelope_url = f'{base_url}/envelopes'
@@ -108,7 +109,7 @@ def ler_envelope():
     return chave_envelope
 
 
-@app.post('/criar_signatario')
+@contract.post('/criar_signatario')
 def criar_signatario():
 
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
@@ -177,7 +178,7 @@ def ler_signatario():
     return {'chave': chave_signatario, 'nome': nome_signatario, 'documento': documento_signatario}
 
 
-@app.post('/criar_documento')
+@contract.post('/criar_documento')
 def criar_documento():
 
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
@@ -260,7 +261,7 @@ def ler_documento():
     return chave_documento
 
 
-@app.post('/qualificar_signatario_documento')
+@contract.post('/qualificar_signatario_documento')
 def qualificar_sig_doc():
     
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
@@ -343,7 +344,7 @@ def ler_qualificacao():
     return chave_qualificacao
 
 
-@app.post('/definir_rubrica')
+@contract.post('/definir_rubrica')
 def definir_rubrica():
     
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
@@ -428,7 +429,7 @@ def ler_rubrica():
     return chave_rubrica
 
 
-@app.post('/definir_autenticacao')
+@contract.post('/definir_autenticacao')
 def definir_autenticacao():
     
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
@@ -511,7 +512,7 @@ def ler_autenticacao():
     return chave_autenticacao
 
 
-@app.patch('/ativar_envelope')
+@contract.patch('/ativar_envelope')
 def ativar_envelope():
 
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
@@ -574,7 +575,7 @@ def ler_ativacao():
     return {'chave': chave_envelope, 'status': status_envelope}
 
 
-@app.post('/notificar_assinatura')
+@contract.post('/notificar_assinatura')
 def notificar_assinatura():
 
     envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
