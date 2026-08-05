@@ -6,4 +6,7 @@ def create_deadline():
     future_date = current_date + dt.timedelta(days=30)
     deadline = f'{future_date}T{zero_hour}.000-03:00'
 
-    return deadline
+    return {
+        'current_date': current_date,
+        'deadline': deadline
+    }
