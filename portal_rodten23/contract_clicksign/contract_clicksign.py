@@ -19,6 +19,8 @@ base_url = os.getenv('BASE_URL')
 access_token = os.getenv('ACCESS_TOKEN')
 template_id = os.getenv('TEMPLATE_ID')
 
+base_url_response_json = './portal_rodten23/contract_clicksign/'
+
 headers = {
     'Authorization': access_token,
     'Content-Type': 'application/vnd.api+json',
@@ -35,7 +37,7 @@ def testar_conta():
         verify=False)
     
     with open(
-        './assinatura_digital_clicksign/resposta_conta.json',
+        f'{base_url_response_json}resposta_conta.json',
         'w', encoding='utf-8') as response_file:
             json.dump(
                 resposta_conta.json(),
@@ -45,7 +47,7 @@ def testar_conta():
             )
 
     with open(
-        './assinatura_digital_clicksign/resposta_conta.json',
+        f'{base_url_response_json}resposta_conta.json',
         'r',encoding='utf-8') as open_file:
             dados_conta = json.load(open_file)
         
@@ -86,7 +88,7 @@ def criar_envelope():
         )
 
     with open(
-        './assinatura_digital_clicksign/resposta_envelope.json',
+        f'{base_url_response_json}resposta_envelope.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_envelope.json(),
@@ -100,7 +102,7 @@ def criar_envelope():
 
 def ler_envelope():
     with open(
-        './assinatura_digital_clicksign/resposta_envelope.json',
+        f'{base_url_response_json}resposta_envelope.json',
         'r',encoding='utf-8') as open_file:
             dados_envelope = json.load(open_file)
     
@@ -112,7 +114,7 @@ def ler_envelope():
 @contract.post('/criar_signatario')
 def criar_signatario():
 
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
     chave_envelope = ''
 
     if envelope.is_file():
@@ -154,7 +156,7 @@ def criar_signatario():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_signatario.json',
+        f'{base_url_response_json}resposta_signatario.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_signatario.json(),
@@ -167,7 +169,7 @@ def criar_signatario():
 
 def ler_signatario():
     with open(
-        './assinatura_digital_clicksign/resposta_signatario.json',
+        f'{base_url_response_json}resposta_signatario.json',
         'r',encoding='utf-8') as open_file:
             dados_signatario = json.load(open_file)
         
@@ -181,8 +183,8 @@ def ler_signatario():
 @contract.post('/criar_documento')
 def criar_documento():
 
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
-    signatario=Path('./assinatura_digital_clicksign/resposta_signatario.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
+    signatario=Path(f'{base_url_response_json}resposta_signatario.json')
     chave_envelope = ''
     nome_signatario = ''
     documento_signatario = ''
@@ -238,7 +240,7 @@ def criar_documento():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_documento.json',
+        f'{base_url_response_json}resposta_documento.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_documento.json(),
@@ -252,7 +254,7 @@ def criar_documento():
 
 def ler_documento():
     with open(
-        './assinatura_digital_clicksign/resposta_documento.json',
+        f'{base_url_response_json}resposta_documento.json',
         'r',encoding='utf-8') as open_file:
             dados_documento = json.load(open_file)
         
@@ -264,9 +266,9 @@ def ler_documento():
 @contract.post('/qualificar_signatario_documento')
 def qualificar_sig_doc():
     
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
-    documento=Path('./assinatura_digital_clicksign/resposta_documento.json')
-    signatario=Path('./assinatura_digital_clicksign/resposta_signatario.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
+    documento=Path(f'{base_url_response_json}resposta_documento.json')
+    signatario=Path(f'{base_url_response_json}resposta_signatario.json')
     chave_envelope = ''
     chave_documento = ''
     chave_signatario = ''
@@ -321,7 +323,7 @@ def qualificar_sig_doc():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_qualificar_sig_doc.json',
+        f'{base_url_response_json}resposta_qualificar_sig_doc.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_qualificar_sig_doc.json(),
@@ -335,7 +337,7 @@ def qualificar_sig_doc():
 
 def ler_qualificacao():
     with open(
-        './assinatura_digital_clicksign/resposta_qualificar_sig_doc.json',
+        f'{base_url_response_json}resposta_qualificar_sig_doc.json',
         'r',encoding='utf-8') as open_file:
             dados_qualificacao = json.load(open_file)
         
@@ -347,9 +349,9 @@ def ler_qualificacao():
 @contract.post('/definir_rubrica')
 def definir_rubrica():
     
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
-    documento=Path('./assinatura_digital_clicksign/resposta_documento.json')
-    signatario=Path('./assinatura_digital_clicksign/resposta_signatario.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
+    documento=Path(f'{base_url_response_json}resposta_documento.json')
+    signatario=Path(f'{base_url_response_json}resposta_signatario.json')
     chave_envelope = ''
     chave_documento = ''
     chave_signatario = ''
@@ -406,7 +408,7 @@ def definir_rubrica():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_definir_rubrica.json',
+        f'{base_url_response_json}resposta_definir_rubrica.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_definir_rubrica.json(),
@@ -420,7 +422,7 @@ def definir_rubrica():
 
 def ler_rubrica():
     with open(
-        './assinatura_digital_clicksign/resposta_definir_rubrica.json',
+        f'{base_url_response_json}resposta_definir_rubrica.json',
         'r',encoding='utf-8') as open_file:
             dados_rubrica = json.load(open_file)
         
@@ -432,9 +434,9 @@ def ler_rubrica():
 @contract.post('/definir_autenticacao')
 def definir_autenticacao():
     
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
-    documento=Path('./assinatura_digital_clicksign/resposta_documento.json')
-    signatario=Path('./assinatura_digital_clicksign/resposta_signatario.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
+    documento=Path(f'{base_url_response_json}resposta_documento.json')
+    signatario=Path(f'{base_url_response_json}resposta_signatario.json')
     chave_envelope = ''
     chave_documento = ''
     chave_signatario = ''
@@ -489,7 +491,7 @@ def definir_autenticacao():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_definir_autenticacao.json',
+        f'{base_url_response_json}resposta_definir_autenticacao.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_definir_autenticacao.json(),
@@ -503,7 +505,7 @@ def definir_autenticacao():
 
 def ler_autenticacao():
     with open(
-        './assinatura_digital_clicksign/resposta_definir_autenticacao.json',
+        f'{base_url_response_json}resposta_definir_autenticacao.json',
         'r',encoding='utf-8') as open_file:
             dados_autenticacao = json.load(open_file)
         
@@ -515,7 +517,7 @@ def ler_autenticacao():
 @contract.patch('/ativar_envelope')
 def ativar_envelope():
 
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
     chave_envelope = ''
 
     if envelope.is_file():
@@ -552,7 +554,7 @@ def ativar_envelope():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_ativacao.json',
+        f'{base_url_response_json}resposta_ativacao.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_ativacao.json(),
@@ -565,7 +567,7 @@ def ativar_envelope():
 
 def ler_ativacao():
     with open(
-        './assinatura_digital_clicksign/resposta_ativacao.json',
+        f'{base_url_response_json}resposta_ativacao.json',
         'r',encoding='utf-8') as open_file:
             dados_ativacao = json.load(open_file)
         
@@ -578,7 +580,7 @@ def ler_ativacao():
 @contract.post('/notificar_assinatura')
 def notificar_assinatura():
 
-    envelope=Path('./assinatura_digital_clicksign/resposta_envelope.json')
+    envelope=Path(f'{base_url_response_json}resposta_envelope.json')
     chave_envelope = ''
 
     if envelope.is_file():
@@ -607,7 +609,7 @@ def notificar_assinatura():
     )
 
     with open(
-        './assinatura_digital_clicksign/resposta_notificacao.json',
+        f'{base_url_response_json}resposta_notificacao.json',
         'w', encoding='utf-8') as response_file:
         json.dump(
             resposta_notificacao.json(),
@@ -620,7 +622,7 @@ def notificar_assinatura():
 
 def ler_notificacao():
     with open(
-        './assinatura_digital_clicksign/resposta_notificacao.json',
+        f'{base_url_response_json}resposta_notificacao.json',
         'r',encoding='utf-8') as open_file:
             dados_notificacao = json.load(open_file)
         
