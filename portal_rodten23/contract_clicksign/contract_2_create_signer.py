@@ -6,7 +6,10 @@ import httpx
 from dotenv import load_dotenv
 from flask import Flask
 
-from portal_rodten23.contract_clicksign.contract_1_create_envelope import create_envelope, read_envelope
+from portal_rodten23.contract_clicksign.contract_1_create_envelope import (
+    create_envelope,
+    read_envelope,
+)
 
 signer = Flask(__name__)
 
@@ -14,7 +17,6 @@ load_dotenv()
 
 base_url = os.getenv('BASE_URL')
 access_token = os.getenv('ACCESS_TOKEN')
-template_id = os.getenv('TEMPLATE_ID')
 
 base_url_response_json = './portal_rodten23/contract_clicksign/'
 
@@ -68,7 +70,9 @@ def create_signer():
     )
 
     with open(
-        f'{base_url_response_json}response_signer.json', 'w', encoding='utf-8',
+        f'{base_url_response_json}response_signer.json',
+        'w',
+        encoding='utf-8',
     ) as response_file:
         json.dump(
             response_signer.json(),
@@ -82,15 +86,15 @@ def create_signer():
 
 def read_signer():
     with open(
-        f'{base_url_response_json}response_signer.json', 'r', encoding='utf-8',
+        f'{base_url_response_json}response_signer.json',
+        'r',
+        encoding='utf-8',
     ) as open_file:
         data_signer = json.load(open_file)
 
     id_signer = data_signer['data']['id']
     name_signer = data_signer['data']['attributes']['name']
-    documentation_signer = data_signer['data']['attributes'][
-        'documentation'
-    ]
+    documentation_signer = data_signer['data']['attributes']['documentation']
 
     return {
         'id_signer': id_signer,
