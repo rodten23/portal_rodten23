@@ -37,7 +37,6 @@ def activate_envelope():
 
     if response_envelope.is_file():
         id_envelope = read_envelope()
-
     else:
         id_envelope = create_envelope()
 
