@@ -35,7 +35,7 @@ headers = {
 }
 
 
-@document.post('/criar_documento')
+@document.post('/create_document')
 def create_document():
     response_envelope = Path(f'{base_url_response_json}response_envelope.json')
     response_signer = Path(f'{base_url_response_json}response_signer.json')

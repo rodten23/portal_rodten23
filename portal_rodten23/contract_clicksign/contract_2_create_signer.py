@@ -27,7 +27,7 @@ headers = {
 }
 
 
-@signer.post('/criar_signatario')
+@signer.post('/create_signer')
 def create_signer():
     response_envelope = Path(f'{base_url_response_json}response_envelope.json')
     id_envelope = ''

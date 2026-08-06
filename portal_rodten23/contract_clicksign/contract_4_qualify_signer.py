@@ -36,7 +36,7 @@ headers = {
 }
 
 
-@qualify.post('/qualificar_signatario_documento')
+@qualify.post('/qualify_signer')
 def qualify_signer():
     response_envelope = Path(f'{base_url_response_json}response_envelope.json')
     response_signer = Path(f'{base_url_response_json}response_signer.json')

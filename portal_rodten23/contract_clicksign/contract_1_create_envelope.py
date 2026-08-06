@@ -25,7 +25,7 @@ headers = {
 }
 
 
-@envelope.post('/envelopes')
+@envelope.post('/create_envelope')
 def create_envelope():
     create_envelope_url = f'{base_url}/envelopes'
 
