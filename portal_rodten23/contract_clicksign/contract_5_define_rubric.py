@@ -29,7 +29,6 @@ load_dotenv()
 
 base_url = os.getenv('BASE_URL')
 access_token = os.getenv('ACCESS_TOKEN')
-template_id = os.getenv('TEMPLATE_ID')
 
 base_url_response_json = './portal_rodten23/contract_clicksign/'
 
