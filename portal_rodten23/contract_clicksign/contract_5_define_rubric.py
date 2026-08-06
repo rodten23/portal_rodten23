@@ -68,9 +68,9 @@ def define_rubric():
         id_document = create_document()
 
     if response_qualify_signer.is_file():
-        read_document()
+        read_qualify_signer()
     else:
-        create_document()
+        qualify_signer()
 
     define_rubric_url = f'{base_url}/envelopes/{id_envelope}/requirements'
 
