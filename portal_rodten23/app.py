@@ -29,6 +29,14 @@ class Contato:
         self.email = email
         self.message = message
 
+class Contract:
+    def __init__(self, emailInput, person_name, cpf, enterprise_name):
+        self.emailInput = emailInput
+        self.person_name = person_name
+        self.cpf = cpf
+        self.enterprise_name = enterprise_name
+
+
 @app.route('/')
 def index():
     data_atual =  date.today()
@@ -68,10 +76,21 @@ def send():
     
     return redirect('/')
 
-@app.route('/contract')
-def contract():
 
-    return render_template('contract.html')
+@app.route('/contract', methods=['GET', 'POST'])
+def contract_page():
+    return render_template('/contract.html')
+        
+# def create_contract():
+#     if request.method == 'POST':
+#         form_Contract = Contract(
+#             request.form['emailInput'],
+#             request.form['person_name'],
+#             request.form['cpf'],
+#             request.form['enterprise_name']
+#         )
+            
+#     return redirect('/')
 
 
 if __name__ == '__main__':
