@@ -65,22 +65,12 @@ form.addEventListener('submit', (e) => {
         console.error('Erro:', error);
         btn.textContent = 'Erro ao criar contrato!';
         btn.disabled = false;
-    });
- 
-    // setTimeout(() => {
-    //     btn.textContent = 'Tente novamente!';
-    //     btn.disabled = false;
-    //     form.reset();
-    //     email.classList.remove('is-valid');
-    //     email.classList.remove('is-invalid');
-    //     terms.classList.remove('is-valid');
-    //     terms.classList.remove('is-invalid');
-    // }, 5000);
+    });    
 });
  
-// // Remove invalid on input
-// ['emailInput', 'termsCheck'].forEach(id => {
-//     document.getElementById(id).addEventListener('input', function () {
-//         this.classList.remove('is-invalid');
-//     });
-// });
+// Remove invalid on input
+['emailInput', 'termsCheck'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function () {
+        this.classList.remove('is-invalid');
+    });
+});
