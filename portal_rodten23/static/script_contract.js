@@ -49,18 +49,20 @@ form.addEventListener('submit', (e) => {
         if (data.redirect) {
             window.location.href = data.redirect;
         } else {
-            console.error('O Flask não enviou a chave redirect:', data)
-            btn.textContent = 'Tente novamente!';
-            btn.disabled = false;
-            // form.reset();
-            // email.classList.remove('is-valid');
-            // email.classList.remove('is-invalid');
-            // terms.classList.remove('is-valid');
-            // terms.classList.remove('is-invalid'); 
+            setTimeout(() => {
+                console.error('O Flask não enviou a chave redirect:', data)
+                btn.textContent = 'Tente novamente!';
+                btn.disabled = false;
+                form.reset();
+                email.classList.remove('is-valid');
+                email.classList.remove('is-invalid');
+                terms.classList.remove('is-valid');
+                terms.classList.remove('is-invalid');
+            }, 5000);
         }
     })
     .catch(error => {
-        console.error('Erro:', Error);
+        console.error('Erro:', error);
         btn.textContent = 'Erro ao criar contrato!';
         btn.disabled = false;
     });
