@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, request, flash, jsonify
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from datetime import date
-from portal_rodten23.calculo_idade import calcular_idade
+from portal_rodten23.calculate_datetime import calculate_age
 import os
 
 from portal_rodten23.contract_clicksign.contract_0_8 import testar_conta
@@ -10,15 +10,15 @@ from portal_rodten23.contract_clicksign.contract_0_8 import testar_conta
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SENHA_CRIPTO_TRANSACOES")
+app.secret_key = os.getenv("TRANSACTION_ENCRYPTION_PASSWORD")
 
 mail_settings = {
     "MAIL_SERVER": "smtp.gmail.com",
     "MAIL_PORT": 587,
     "MAIL_USE_TLS": True,
     "MAIL_USE_SSL": False,
-    "MAIL_USERNAME": os.getenv("MEU_EMAIL"),
-    "MAIL_PASSWORD": os.getenv("SENHA_MEU_EMAIL")
+    "MAIL_USERNAME": os.getenv("MY_EMAIL"),
+    "MAIL_PASSWORD": os.getenv("MY_EMAIL_PASSWORD")
 }
 
 app.config.update(mail_settings)
@@ -41,15 +41,15 @@ class Contract:
 
 @app.route('/')
 def index():
-    data_atual =  date.today()
-    ano_nasc = os.getenv('ANO_NASCIMENTO')
-    mes_nasc = os.getenv('MES_NASCIMENTO')
-    dia_nasc = os.getenv('DIA_NASCIMENTO')
-    ano_inicio_empresa = os.getenv('ANO_INICIO_EMPRESA')
+    current_date =  date.today()
+    year_birth = os.getenv('YEAR_BIRTH')
+    month_birth = os.getenv('MONTH_BIRTH')
+    day_birth = os.getenv('DAY_BIRTH')
+    year_joining_company = os.getenv('YEAR_JOINING_COMPANY')
 
-    idade = calcular_idade(data_atual, ano_nasc, mes_nasc, dia_nasc)
-    experiencia = data_atual.year - int(ano_inicio_empresa)
-    return render_template('index.html', idade = idade, experiencia = experiencia, ano_corrente = data_atual.year)
+    my_age = calculate_age(current_date = current_date, year_birth = year_birth, month_birth = month_birth, day_birth = day_birth)
+    it_experience = current_date.year - int(year_joining_company)
+    return render_template('index.html', idade = my_age, experiencia = it_experience, ano_corrente = current_date.year)
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
