@@ -5,7 +5,7 @@ from pathlib import Path
 
 import httpx
 from dotenv import load_dotenv
-from flask import Flask, redirect
+from flask import Flask
 
 contract = Flask(__name__)
 
@@ -44,9 +44,7 @@ def testar_conta():
 
     chave_conta = dados_conta['data'][0]['id']
 
-    print(chave_conta)
-
-    return redirect('/')
+    return chave_conta
 
 
 @contract.post('/envelopes')
