@@ -31,7 +31,7 @@
                         Usaremos com nossos dados fictícios.<br><br>Basta incluir um e-mail ao qual tenha acesso, pois lhe enviaremos um Token OTP para concluir assinatura deste contrato teste.<br><br>O e-mail e outros dados que você decidir incluir serão enviados apenas para a Clicksign.</p>
                 </div>
     
-                <form id="contractForm" novalidate>
+                <form id="contractForm" method="POST" action="">
     
                     <!-- Email de quem assinará -->
                     <div class="mb-3">
@@ -42,6 +42,7 @@
                                 type="email"
                                 class="form-control"
                                 id="emailInput"
+                                name="emailInput"
                                 placeholder="E-mail que receberá Token OTP"
                                 autocomplete="email"
                                 maxlength="45"
@@ -58,13 +59,14 @@
 
                     <!-- Nome de quem assinará -->
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nome do contratante fictício</label>
+                        <label for="person_name" class="form-label">Nome do contratante fictício</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="bi bi-person"></i></span>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="person-name"
+                                id="person_name"
+                                name="person_name"
                                 placeholder="Digite o nome do contratante"
                                 maxlength="45"
                             />
@@ -79,13 +81,14 @@
 
                     <!-- CPF de quem assinará -->
                     <div class="mb-3">
-                        <label for="cpf" class="form-label">CPF do contratante fictício</label>
+                        <label for="person_document" class="form-label">CPF do contratante fictício</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="bi bi-person-vcard"></i></span>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="cpf"
+                                id="person_document"
+                                name="person_document"
                                 placeholder="Digite o CPF do contratante"
                                 maxlength="14"
                             />
@@ -100,13 +103,14 @@
 
                     <!-- Nome da empresa contratada -->
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nome da empresa fictícia</label>
+                        <label for="enterprise_name" class="form-label">Nome da empresa fictícia</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="bi bi-shop"></i></span>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="enterprise-name"
+                                id="enterprise_name"
+                                name="enterprise_name"
                                 placeholder="Digite o nome da empresa contratada"
                                 maxlength="45"
                             />
@@ -138,7 +142,7 @@
     
                 </form>
 
-                <script src="../static/script_contract.js" type="text/javascript"></script>
+                <!-- <script src="../static/script_contract.js" type="text/javascript"></script> -->
 
             </div>
         </div>

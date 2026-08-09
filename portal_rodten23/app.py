@@ -32,10 +32,10 @@ class Contato:
         self.message = message
 
 class Contract:
-    def __init__(self, emailInput, person_name, cpf, enterprise_name):
+    def __init__(self, emailInput, person_name, person_document, enterprise_name):
         self.emailInput = emailInput
         self.person_name = person_name
-        self.cpf = cpf
+        self.person_document = person_document
         self.enterprise_name = enterprise_name
 
 
@@ -79,22 +79,38 @@ def send():
     return redirect('/')
 
 
-@app.route('/contract')
+@app.route('/contract', methods=['GET', 'POST'])
 def contract():
-    return render_template('/contract.html')
+    if request.method == 'GET':
+        return render_template('contract.html')
 
-
-@app.route('/create_contract', methods=['GET', 'POST'])
-def create_contract():
     if request.method == 'POST':
         form_Contract = Contract(
-            request.form['emailInput'],
-            request.form['person_name'],
-            request.form['cpf'],
-            request.form['enterprise_name']
+            request.form.get('emailInput'),
+            request.form.get('person_name'),
+            request.form.get('person_document'),
+            request.form.get('enterprise_name')
         )
+
+        print(form_Contract.emailInput, form_Contract.person_name, form_Contract.person_document, form_Contract.enterprise_name)
+
+        print(testar_conta())
+        return redirect('/')
+
+
+# @app.route('/create_contract', methods=['POST'])
+# def create_contract():
+#     if request.method == 'POST':
+#         form_Contract = Contract(
+#             request.form['emailInput'],
+#             request.form['person_name'],
+#             request.form['cpf'],
+#             request.form['enterprise_name']
+#         )
             
-    return testar_conta()
+#         return testar_conta()
+
+#     return redirect('/')
 
 
 if __name__ == '__main__':
