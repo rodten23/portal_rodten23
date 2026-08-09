@@ -5,6 +5,8 @@ from datetime import date
 from portal_rodten23.calculo_idade import calcular_idade
 import os
 
+from portal_rodten23.contract_clicksign.contract_0_8 import testar_conta
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -77,20 +79,22 @@ def send():
     return redirect('/')
 
 
-@app.route('/contract', methods=['GET', 'POST'])
-def contract_page():
+@app.route('/contract')
+def contract():
     return render_template('/contract.html')
-        
-# def create_contract():
-#     if request.method == 'POST':
-#         form_Contract = Contract(
-#             request.form['emailInput'],
-#             request.form['person_name'],
-#             request.form['cpf'],
-#             request.form['enterprise_name']
-#         )
+
+
+@app.route('/create_contract', methods=['GET', 'POST'])
+def create_contract():
+    if request.method == 'POST':
+        form_Contract = Contract(
+            request.form['emailInput'],
+            request.form['person_name'],
+            request.form['cpf'],
+            request.form['enterprise_name']
+        )
             
-#     return redirect('/')
+    return testar_conta()
 
 
 if __name__ == '__main__':
