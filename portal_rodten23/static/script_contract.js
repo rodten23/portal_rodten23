@@ -34,21 +34,51 @@ form.addEventListener('submit', (e) => {
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Criando contrato teste...';
     btn.disabled = true;
- 
-    setTimeout(() => {
-        btn.textContent = 'Tente novamente!';
+
+    fetch('/contract', {
+        method:'POST',
+        body: new FormData(form)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposa do servidor.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect;
+        } else {
+            console.error('O Flask não enviou a chave redirect:', data)
+            btn.textContent = 'Tente novamente!';
+            btn.disabled = false;
+            // form.reset();
+            // email.classList.remove('is-valid');
+            // email.classList.remove('is-invalid');
+            // terms.classList.remove('is-valid');
+            // terms.classList.remove('is-invalid'); 
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', Error);
+        btn.textContent = 'Erro ao criar contrato!';
         btn.disabled = false;
-        form.reset();
-        email.classList.remove('is-valid');
-        email.classList.remove('is-invalid');
-        terms.classList.remove('is-valid');
-        terms.classList.remove('is-invalid');
-    }, 1400);
+    });
+ 
+    // setTimeout(() => {
+    //     btn.textContent = 'Tente novamente!';
+    //     btn.disabled = false;
+    //     form.reset();
+    //     email.classList.remove('is-valid');
+    //     email.classList.remove('is-invalid');
+    //     terms.classList.remove('is-valid');
+    //     terms.classList.remove('is-invalid');
+    // }, 5000);
 });
  
-// Remove invalid on input
-['emailInput', 'termsCheck'].forEach(id => {
-    document.getElementById(id).addEventListener('input', function () {
-        this.classList.remove('is-invalid');
-    });
-});
+// // Remove invalid on input
+// ['emailInput', 'termsCheck'].forEach(id => {
+//     document.getElementById(id).addEventListener('input', function () {
+//         this.classList.remove('is-invalid');
+//     });
+// });

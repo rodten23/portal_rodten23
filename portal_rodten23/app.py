@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, flash
+from flask import Flask, render_template, redirect, request, flash, jsonify
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from datetime import date
@@ -95,7 +95,7 @@ def contract():
         print(form_Contract.emailInput, form_Contract.person_name, form_Contract.person_document, form_Contract.enterprise_name)
 
         print(testar_conta())
-        return redirect('/')
+        return jsonify({"redirect": "/"})
 
 
 # @app.route('/create_contract', methods=['POST'])
