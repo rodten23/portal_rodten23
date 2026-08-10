@@ -5,25 +5,32 @@ from datetime import date
 from portal_rodten23.calculate_datetime import calculate_age
 import os
 
-from portal_rodten23.contract_clicksign.contract_0_8 import testar_conta
+from portal_rodten23.contract_clicksign.contract_1_create_envelope import (
+    create_envelope,
+)
+
+from portal_rodten23.contract_clicksign.contract_2_create_signer import (
+    create_signer,
+)
 
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("TRANSACTION_ENCRYPTION_PASSWORD")
+app.secret_key = os.getenv('TRANSACTION_ENCRYPTION_PASSWORD')
 
 mail_settings = {
-    "MAIL_SERVER": "smtp.gmail.com",
-    "MAIL_PORT": 587,
-    "MAIL_USE_TLS": True,
-    "MAIL_USE_SSL": False,
-    "MAIL_USERNAME": os.getenv("MY_EMAIL"),
-    "MAIL_PASSWORD": os.getenv("MY_EMAIL_PASSWORD")
+    'MAIL_SERVER': 'smtp.gmail.com',
+    'MAIL_PORT': 587,
+    'MAIL_USE_TLS': True,
+    'MAIL_USE_SSL': False,
+    'MAIL_USERNAME': os.getenv('MY_EMAIL'),
+    'MAIL_PASSWORD': os.getenv('MY_EMAIL_PASSWORD'),
 }
 
 app.config.update(mail_settings)
 
 mail = Mail(app)
+
 
 class Contato:
     def __init__(self, nome, email, message):
@@ -31,8 +38,11 @@ class Contato:
         self.email = email
         self.message = message
 
+
 class Contract:
-    def __init__(self, emailInput, person_name, person_document, enterprise_name):
+    def __init__(
+        self, emailInput, person_name, person_document, enterprise_name
+    ):
         self.emailInput = emailInput
         self.person_name = person_name
         self.person_document = person_document
@@ -41,15 +51,27 @@ class Contract:
 
 @app.route('/')
 def index():
-    current_date =  date.today()
+    current_date = date.today()
     year_birth = os.getenv('YEAR_BIRTH')
     month_birth = os.getenv('MONTH_BIRTH')
     day_birth = os.getenv('DAY_BIRTH')
     year_joining_company = os.getenv('YEAR_JOINING_COMPANY')
 
-    my_age = calculate_age(current_date = current_date, year_birth = year_birth, month_birth = month_birth, day_birth = day_birth)
+    my_age = calculate_age(
+        current_date=current_date,
+        year_birth=year_birth,
+        month_birth=month_birth,
+        day_birth=day_birth,
+    )
     it_experience = current_date.year - int(year_joining_company)
-    return render_template('index.html', idade = my_age, experiencia = it_experience, ano_corrente = current_date.year)
+
+    return render_template(
+        'index.html',
+        idade=my_age,
+        experiencia=it_experience,
+        ano_corrente=current_date.year,
+    )
+
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
@@ -57,25 +79,25 @@ def send():
         form_Contato = Contato(
             request.form['nome'],
             request.form['email'],
-            request.form['message']
+            request.form['message'],
         )
 
         msg = Message(
-            subject = f'{form_Contato.nome} te enviou uma mensagem pelo portifólio!',
-            sender = app.config.get("MAIL_USERNAME"),
-            recipients = ['rodten23@gmail.com', app.config.get("MAIL_USERNAME")],
-            body = f'''
+            subject=f'{form_Contato.nome} te enviou uma mensagem pelo portifólio!',
+            sender=app.config.get('MAIL_USERNAME'),
+            recipients=['rodten23@gmail.com', app.config.get('MAIL_USERNAME')],
+            body=f"""
 
             {form_Contato.nome}, com o e-mail {form_Contato.email}, enviou a seguinte mensagem:
 
             {form_Contato.message}
-            '''
+            """,
         )
 
         mail.send(msg)
 
         flash('Mensagem enviada com sucesso!')
-    
+
     return redirect('/')
 
 
@@ -89,13 +111,32 @@ def contract():
             request.form.get('emailInput'),
             request.form.get('person_name'),
             request.form.get('person_document'),
-            request.form.get('enterprise_name')
+            request.form.get('enterprise_name'),
         )
 
-        print(form_Contract.emailInput, form_Contract.person_name, form_Contract.person_document, form_Contract.enterprise_name)
+        envelope_id = create_envelope()
 
-        print(testar_conta())
-        return jsonify({"redirect": "/"})
+        signer = create_signer(envelope_id = envelope_id, person_name = form_Contract.person_name, emailInput = form_Contract.emailInput, person_document = form_Contract.person_document)
+
+        id_signer = signer['id_signer']
+
+        print(f'{envelope_id}')
+
+        print(f'{id_signer}')
+
+        return jsonify({"id_signer": id_signer})
+
+        # return render_template(
+        #     'contract.html',
+        #     id_signer = id_signer
+        # )
+
+        
+
+        # print(form_Contract.emailInput, form_Contract.person_name, form_Contract.person_document, form_Contract.enterprise_name)
+
+        # print(testar_conta())
+        # return jsonify({"redirect": "/"})
 
 
 # @app.route('/create_contract', methods=['POST'])
@@ -107,7 +148,7 @@ def contract():
 #             request.form['cpf'],
 #             request.form['enterprise_name']
 #         )
-            
+
 #         return testar_conta()
 
 #     return redirect('/')

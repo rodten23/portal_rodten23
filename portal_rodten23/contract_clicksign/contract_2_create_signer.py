@@ -6,10 +6,10 @@ import httpx
 from dotenv import load_dotenv
 from flask import Flask
 
-from portal_rodten23.contract_clicksign.contract_1_create_envelope import (
-    create_envelope,
-    read_envelope,
-)
+# from portal_rodten23.contract_clicksign.contract_1_create_envelope import (
+#     create_envelope,
+#     read_envelope,
+# )
 
 signer = Flask(__name__)
 
@@ -27,29 +27,29 @@ headers = {
 }
 
 
-@signer.post('/create_signer')
-def create_signer():
-    response_envelope = Path(f'{base_url_response_json}response_envelope.json')
-    id_envelope = ''
+# @signer.post('/create_signer')
+def create_signer(envelope_id, person_name, emailInput, person_document):
+    # response_envelope = Path(f'{base_url_response_json}response_envelope.json')
+    # id_envelope = ''
 
-    if response_envelope.is_file():
-        id_envelope = read_envelope()
+    # if response_envelope.is_file():
+    #     id_envelope = read_envelope()
 
-    else:
-        id_envelope = create_envelope()
+    # else:
+    #     id_envelope = create_envelope()
 
-    create_signer_url = f'{base_url}/envelopes/{id_envelope}/signers'
+    create_signer_url = f'{base_url}/envelopes/{envelope_id}/signers'
 
     body_signer = json.dumps({
         'data': {
             'type': 'signers',
             'attributes': {
-                'name': 'Testador Que Assina',
-                'email': 'rodten23@gmail.com',
+                'name': f'{person_name}',
+                'email': f'{emailInput}',
                 'birthday': '2000-01-01',
                 'phone_number': '11976198003',
                 'has_documentation': True,
-                'documentation': '123.480.920-69',
+                'documentation': f'{person_document}',
                 'refusable': True,
                 'group': 1,
                 'location_required_enabled': True,
@@ -69,35 +69,47 @@ def create_signer():
         verify=False,
     )
 
-    with open(
-        f'{base_url_response_json}response_signer.json',
-        'w',
-        encoding='utf-8',
-    ) as response_file:
-        json.dump(
-            response_signer.json(),
-            response_file,
-            ensure_ascii=False,
-            indent=4,
-        )
-
-    return read_signer()
-
-
-def read_signer():
-    with open(
-        f'{base_url_response_json}response_signer.json',
-        'r',
-        encoding='utf-8',
-    ) as open_file:
-        data_signer = json.load(open_file)
-
-    id_signer = data_signer['data']['id']
-    name_signer = data_signer['data']['attributes']['name']
-    documentation_signer = data_signer['data']['attributes']['documentation']
+    id_signer = response_signer.json()['data']['id']
+    name_signer = response_signer.json()['data']['attributes']['name']
+    documentation_signer = response_signer.json()['data']['attributes']['documentation']
 
     return {
         'id_signer': id_signer,
         'name_signer': name_signer,
         'documentation_signer': documentation_signer,
-    }
+     }
+
+
+
+#     with open(
+#         f'{base_url_response_json}response_signer.json',
+#         'w',
+#         encoding='utf-8',
+#     ) as response_file:
+#         json.dump(
+#             response_signer.json(),
+#             response_file,
+#             ensure_ascii=False,
+#             indent=4,
+#         )
+
+#     return read_signer()
+
+
+# def read_signer():
+#     with open(
+#         f'{base_url_response_json}response_signer.json',
+#         'r',
+#         encoding='utf-8',
+#     ) as open_file:
+#         data_signer = json.load(open_file)
+
+#     id_signer = data_signer['data']['id']
+#     name_signer = data_signer['data']['attributes']['name']
+#     documentation_signer = data_signer['data']['attributes']['documentation']
+
+#     return {
+#         'id_signer': id_signer,
+#         'name_signer': name_signer,
+#         'documentation_signer': documentation_signer,
+#     }
