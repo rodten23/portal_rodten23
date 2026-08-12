@@ -21,6 +21,10 @@ from portal_rodten23.contract_clicksign.contract_4_qualify_signer import (
     qualify_signer,
 )
 
+from portal_rodten23.contract_clicksign.contract_5_define_rubric import (
+    define_rubric,
+)
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -132,6 +136,8 @@ def contract():
 
         id_qualify_signer = qualify_signer(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
 
+        id_define_rubric = define_rubric(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
+
         print(envelope_id)
 
         print(id_signer)
@@ -139,6 +145,8 @@ def contract():
         print(id_document)
 
         print(id_qualify_signer)
+
+        print(id_define_rubric)
 
         return jsonify({"id_signer": id_signer})
 
