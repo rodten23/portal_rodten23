@@ -25,6 +25,10 @@ from portal_rodten23.contract_clicksign.contract_5_define_rubric import (
     define_rubric,
 )
 
+from portal_rodten23.contract_clicksign.contract_6_define_authentication import (
+    define_authentication,
+)
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -138,6 +142,8 @@ def contract():
 
         id_define_rubric = define_rubric(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
 
+        id_define_authentication = define_authentication(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
+
         print(envelope_id)
 
         print(id_signer)
@@ -147,6 +153,8 @@ def contract():
         print(id_qualify_signer)
 
         print(id_define_rubric)
+
+        print(id_define_authentication)
 
         return jsonify({"id_signer": id_signer})
 
