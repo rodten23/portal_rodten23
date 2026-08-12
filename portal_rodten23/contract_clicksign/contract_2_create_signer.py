@@ -1,6 +1,6 @@
 import json
 import os
-from pathlib import Path
+#from pathlib import Path
 
 import httpx
 from dotenv import load_dotenv
@@ -47,7 +47,7 @@ def create_signer(envelope_id, person_name, emailInput, person_document):
                 'name': f'{person_name}',
                 'email': f'{emailInput}',
                 'birthday': '2000-01-01',
-                'phone_number': '11976198003',
+                #'phone_number': '11976198003',
                 'has_documentation': True,
                 'documentation': f'{person_document}',
                 'refusable': True,

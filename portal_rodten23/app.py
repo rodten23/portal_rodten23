@@ -13,6 +13,10 @@ from portal_rodten23.contract_clicksign.contract_2_create_signer import (
     create_signer,
 )
 
+from portal_rodten23.contract_clicksign.contract_3_create_document import (
+    create_document,
+)
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -120,9 +124,13 @@ def contract():
 
         id_signer = signer['id_signer']
 
-        print(f'{envelope_id}')
+        id_document = create_document(envelope_id = envelope_id, name_signer = form_Contract.person_name, documentation_signer = form_Contract.person_document)
 
-        print(f'{id_signer}')
+        print(envelope_id)
+
+        print(id_signer)
+
+        print(id_document)
 
         return jsonify({"id_signer": id_signer})
 
