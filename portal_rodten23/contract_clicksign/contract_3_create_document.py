@@ -36,7 +36,7 @@ headers = {
 
 
 #@document.post('/create_document')
-def create_document(envelope_id, name_signer, documentation_signer):
+def create_document(envelope_id, enterprise_name, name_signer, documentation_signer):
     # response_envelope = Path(f'{base_url_response_json}response_envelope.json')
     # response_signer = Path(f'{base_url_response_json}response_signer.json')
     # id_envelope = ''
@@ -85,7 +85,7 @@ def create_document(envelope_id, name_signer, documentation_signer):
                 'template': {
                     'key': template_id,
                     'data': {
-                        'enterprise': 'Empresa Teste Ltda',
+                        'enterprise': enterprise_name,
                         'signer_name': name_signer,
                         'signer_document': documentation_signer,
                         'created_day_contract': current_date.day,
