@@ -33,6 +33,10 @@ from portal_rodten23.contract_clicksign.contract_7_activate_envelope import (
     activate_envelope,
 )
 
+from portal_rodten23.contract_clicksign.contract_8_notify_signature import (
+    notify_signature,
+)
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -150,6 +154,8 @@ def contract():
 
         activated_envelope = activate_envelope(envelope_id = envelope_id)
 
+        notification = notify_signature(envelope_id = envelope_id)
+
         print(envelope_id)
 
         print(id_signer)
@@ -163,6 +169,8 @@ def contract():
         print(id_define_authentication)
 
         print(activated_envelope['id_activated_envelope'], activated_envelope['status_activated_envelope'],)
+
+        print(notification['id_notification'], notification['notification_message'])
 
         return jsonify({"id_signer": id_signer})
 
