@@ -31,7 +31,7 @@
                         Usaremos com nossos dados fictícios.<br><br>Basta incluir um e-mail ao qual tenha acesso, pois lhe enviaremos um Token OTP para concluir assinatura deste contrato teste.<br><br>O e-mail e outros dados que você decidir incluir serão enviados apenas para a Clicksign.</p>
                 </div>
     
-                <form id="contractForm" novalidate>
+                <form id="contractForm" novalidate method="POST" action="">
     
                     <!-- Email de quem assinará -->
                     <div class="mb-3">
@@ -42,6 +42,7 @@
                                 type="email"
                                 class="form-control"
                                 id="emailInput"
+                                name="emailInput"
                                 placeholder="E-mail que receberá Token OTP"
                                 autocomplete="email"
                                 maxlength="45"
@@ -58,13 +59,14 @@
 
                     <!-- Nome de quem assinará -->
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nome do contratante fictício</label>
+                        <label for="person_name" class="form-label">Nome do contratante fictício</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="bi bi-person"></i></span>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="person-name"
+                                id="person_name"
+                                name="person_name"
                                 placeholder="Digite o nome do contratante"
                                 maxlength="45"
                             />
@@ -79,13 +81,14 @@
 
                     <!-- CPF de quem assinará -->
                     <div class="mb-3">
-                        <label for="cpf" class="form-label">CPF do contratante fictício</label>
+                        <label for="person_document" class="form-label">CPF do contratante fictício</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="bi bi-person-vcard"></i></span>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="cpf"
+                                id="person_document"
+                                name="person_document"
                                 placeholder="Digite o CPF do contratante"
                                 maxlength="14"
                             />
@@ -100,13 +103,14 @@
 
                     <!-- Nome da empresa contratada -->
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nome da empresa fictícia</label>
+                        <label for="enterprise_name" class="form-label">Nome da empresa fictícia</label>
                         <div class="input-wrap">
                             <span class="icon"><i class="bi bi-shop"></i></span>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="enterprise-name"
+                                id="enterprise_name"
+                                name="enterprise_name"
                                 placeholder="Digite o nome da empresa contratada"
                                 maxlength="45"
                             />
@@ -173,38 +177,120 @@
 
                     <!-- <input id='request_signature_key' />
                     <input type='button' value='Load' onclick='run()'/> -->
-                    <div id='container' style='height: 600px'>
+                    <div id='container' style='height: 600px'></div>
 
-                        <script type="text/javascript">
-                            var widget = new Clicksign('abdc3d0a-688d-47f3-9f5d-8d36db29acff');
+                    <script type="text/javascript">
 
-                            // Defina o endpoint apropriado (Sandbox ou Produção)
-                            widget.endpoint = 'https://sandbox.clicksign.com'; // Ou 'https://app.clicksign.com'
+                        var widgetInstance = null;
 
-                            // (Opcional) Defina a URL de origem se estiver usando WebView
-                            widget.origin = window.origin;
+                        // var idSigner = JSON.parse('{{ id_signer | default(None) | tojson }}');
+                        // var widget = null;
 
-                            // Renderize o widget dentro do container
-                            widget.mount('container');
+                        function renderizarWidget(idSigner) {
+                            if (!idSigner) {
+                                console.error('Nenhum idSigner recebido do Flask ainda.');
+                                return;
+                            }
 
-                            // (Opcional) Adicione callbacks para eventos
-                            widget.on('loaded', function(event) {
-                                console.log('Widget carregado!');
+                            const container = document.getElementById('container');
+
+                            if(widgetInstance) {
+                                try {
+                                    widgetInstance.unmount();
+                                } catch (e) {
+                                    console.log('Erro ao desmontar widget anterior:', e);
+                                }
+                            }
+
+                            container.innerHTML = '';
+
+                            widgetInstance = new Clicksign(idSigner);
+                            widgetInstance.endpoint = 'https://sandbox.clicksign.com';
+                            widgetInstance.origin = window.origin;
+                            widgetInstance.mount('container');
+
+                            widgetInstance.on('loaded', function(event) { console.log('Widget carregado!'); });
+                            widgetInstance.on('signed', function(event) { console.log('Documento assinado!'); });
+                            widgetInstance.on('resized', function(event) {
+                                    console.log('resized!');
+                                    document.getElementById('container').style.height = event.data.height + 'px';
                             });
+                        };
 
-                            widget.on('signed', function(event) {
-                                console.log('Documento assinado!');
-                                // Redirecione o usuário ou execute alguma ação
-                                // window.location.href = '/obrigado';
-                            });
+                        function enviarFormulario(event) {
+                            if (event) event.preventDefault();
 
-                            widget.on('resized', function(event) {
-                                console.log('Widget redimensionado:', event.data.height);
-                                document.getElementById('container').style.height = event.data.height + 'px';
-                            });
-                        </script>
+                            const form = document.getElementById('contractForm');
 
-                    </div>
+                            fetch('/contract', {
+                                method:'POST',
+                                body: new FormData(form)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.id_signer) {
+                                    console.log('Novo idSigner recebido:', data.id_signer);
+                                    renderizarWidget(data.id_signer);
+                                } else {
+                                    setTimeout(() => {
+                                        console.error('O Flask não enviou a chave redirect:', data)
+                                        btn.textContent = 'Tente novamente!';
+                                        btn.disabled = false;
+                                        form.reset();
+                                        email.classList.remove('is-valid');
+                                        email.classList.remove('is-invalid');
+                                        terms.classList.remove('is-valid');
+                                        terms.classList.remove('is-invalid');
+                                    }, 5000);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erro:', error);
+                                btn.textContent = 'Erro ao criar contrato!';
+                                btn.disabled = false;
+                            });    
+                        };
+
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const formulario = document.getElementById('contractForm');
+        
+                            if (formulario) {
+                                formulario.addEventListener('submit', enviarFormulario);
+                            } else {
+                                console.error("Erro: Formulário com ID 'seuFormularioID' não foi encontrado na página.");
+                            }
+                        });
+                            
+                            // const idSigner = JSON.parse('{{ id_signer | default(None) | tojson }}')
+
+                            // if (idSigner) {
+                            //     const container = document.getElementById('container');
+                            //     container.innerHTML = '';
+
+                            //     var widget = new Clicksign(idSigner);
+                            //     widget.endpoint = 'https://sandbox.clicksign.com';
+                            //     widget.origin = window.origin;
+                                
+                            //     widget.mount('container');
+                                
+                            //     widget.on('loaded', function(event) {
+                            //         console.log('Widget carregado!');
+                            //     });
+                                
+                            //     widget.on('signed', function(event) {
+                            //         console.log('Documento assinado!');
+                            //     });
+                            //     // Redirecione o usuário ou execute alguma ação
+                            //     // window.location.href = '/obrigado';
+                                
+                            //     widget.on('resized', function(event) {
+                            //         console.log('Widget redimensionado:', event.data.height);
+                            //         document.getElementById('container').style.height = event.data.height + 'px';
+                            //     });
+                            // }
+                    </script>
+
+                    
 
                     <!-- <script type='text/javascript'>
 
