@@ -69,6 +69,11 @@ def create_signer(envelope_id, person_name, emailInput, person_document):
         verify=False,
     )
 
+    if response_signer.status_code != 201:
+        print(f'Erro na Clicksign (Status {response_signer.status_code}):')
+        print(response_signer.text)
+        raise Exception(f'Falha ao criar signatário: {response_signer.text}')
+
     id_signer = response_signer.json()['data']['id']
     name_signer = response_signer.json()['data']['attributes']['name']
     documentation_signer = response_signer.json()['data']['attributes']['documentation']
