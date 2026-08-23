@@ -6,19 +6,21 @@ authors = ["Rodrigo Alves Tenório <rodten23@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.13.*"
+python = ">=3.13,<4.0"
 flask = "^3.1.0"
 python-dotenv = "^1.0.1"
 gunicorn = "^23.0.0"
 flask-mail = "^0.10.0"
 requests = "^2.32.3"
 httpx = "^0.28.1"
+httpcore = "^1.0.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 pytest-cov = "^6.0.0"
 taskipy = "^1.14.1"
 ruff = "^0.8.4"
+ipykernel = "^7.3.0"
 
 [tool.pytest.ini_options]
 pythonpath = "."
