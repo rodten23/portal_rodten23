@@ -209,16 +209,20 @@ body {
 /* Input icon wrapper */
 .input-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
 }
 
 .input-wrap .icon {
   position: absolute;
   left: 0.85rem;
-  top: 50%;
-  transform: translateY(-50%);
+  /* top: 50%;
+  transform: translateY(-50%); */
   color: var(--muted);
   pointer-events: none;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .input-wrap .form-control {

@@ -33,7 +33,6 @@
     
                 <form id="contractForm" novalidate method="POST" action="">
     
-                    <!-- Email de quem assinará -->
                     <div class="mb-3">
                         <label for="emailInput" class="form-label">Endereço de E-mail <a style="color: #149ddd">(obrigatório)</a></label>
                         <div class="input-wrap">
@@ -52,12 +51,6 @@
                         </div>
                     </div>
 
-                    <!-- <div>
-                        <label for="name" class="form-label">Nome do cliente:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do contratante..." required>
-                    </div> -->
-
-                    <!-- Nome de quem assinará -->
                     <div class="mb-3">
                         <label for="person_name" class="form-label">Nome do contratante fictício</label>
                         <div class="input-wrap">
@@ -70,16 +63,10 @@
                                 placeholder="Digite o nome do contratante"
                                 maxlength="45"
                             />
+                            <div class="invalid-feedback">Digite um nome com no mínimo 3 caracteres, 1 espaço e sobrenome.</div>
                         </div>
                     </div>
 
-                    <!-- <div>
-                        <label for="cpf" class="form-label">CPF do cliente:</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite o CPF do contratante..." required>
-                    </div> -->
-
-
-                    <!-- CPF de quem assinará -->
                     <div class="mb-3">
                         <label for="person_document" class="form-label">CPF do contratante fictício</label>
                         <div class="input-wrap">
@@ -92,16 +79,10 @@
                                 placeholder="Digite o CPF do contratante"
                                 maxlength="14"
                             />
+                            <div class="invalid-feedback">Digite um CPF no formato 333.555.777-99</div>
                         </div>
                     </div>
 
-                    <!-- <div>
-                        <label for="enterprise" class="form-label">Nome da empresa:</label>
-                        <input type="text" class="form-control" id="enterprise" name="enterprise" placeholder="Digite o nome da empresa..." required>
-                    </div> -->
-
-
-                    <!-- Nome da empresa contratada -->
                     <div class="mb-3">
                         <label for="enterprise_name" class="form-label">Nome da empresa fictícia</label>
                         <div class="input-wrap">
@@ -119,7 +100,6 @@
     
                     <hr class="divider"/>
     
-                    <!-- Checkbox -->
                     <div class="mb-4">
                         <div class="form-check">
                             <input
@@ -135,7 +115,6 @@
                         </div>
                     </div>
     
-                    <!-- Submit -->
                     <button type="submit" class="btn btn-primary" id="submitBtn">
                         Criar Contrato Teste
                     </button>
@@ -163,28 +142,12 @@
                 <hr class="divider"/>
 
                 <div class="widget">
-                    
 
-                    <!-- <div>
-                        <label for="celular" class="form-label">Celular do cliente:</label>
-                        <input type="text" class="form-control" id="celular" name="celular" placeholder="Digite o celular do contratante..." maxlength="13" required>
-                    </div> -->
-                                            
-                                                
-                    <!-- <div class="col-12 d-flex justify-content-center mt-5">
-                        <button id="btn-enviar" type="submit" class="btn btn-primary">Assinar Contrato</button>
-                    </div> -->
-
-                    <!-- <input id='request_signature_key' />
-                    <input type='button' value='Load' onclick='run()'/> -->
                     <div id='container' style='height: 600px'></div>
 
                     <script type="text/javascript">
 
                         var widgetInstance = null;
-
-                        // var idSigner = JSON.parse('{{ id_signer | default(None) | tojson }}');
-                        // var widget = null;
 
                         function renderizarWidget(idSigner) {
                             if (!idSigner) {
@@ -261,33 +224,6 @@
                             }
                         });
                             
-                            // const idSigner = JSON.parse('{{ id_signer | default(None) | tojson }}')
-
-                            // if (idSigner) {
-                            //     const container = document.getElementById('container');
-                            //     container.innerHTML = '';
-
-                            //     var widget = new Clicksign(idSigner);
-                            //     widget.endpoint = 'https://sandbox.clicksign.com';
-                            //     widget.origin = window.origin;
-                                
-                            //     widget.mount('container');
-                                
-                            //     widget.on('loaded', function(event) {
-                            //         console.log('Widget carregado!');
-                            //     });
-                                
-                            //     widget.on('signed', function(event) {
-                            //         console.log('Documento assinado!');
-                            //     });
-                            //     // Redirecione o usuário ou execute alguma ação
-                            //     // window.location.href = '/obrigado';
-                                
-                            //     widget.on('resized', function(event) {
-                            //         console.log('Widget redimensionado:', event.data.height);
-                            //         document.getElementById('container').style.height = event.data.height + 'px';
-                            //     });
-                            // }
                     </script>
 
                     
@@ -311,27 +247,7 @@
                                             .replace(/(-\d{2})\d+?$/, '$1');
                                 e.target.value = cpfPattern;
                         });
-
-                        var widget, input = document.getElementById('request_signature_key');
-
-                        function run () {
-                            var request_signature_key = input.value;
-
-                            if(widget) { widget.unmount(); }
-
-                            widget = new Clicksign(request_signature_key);
-
-                            widget.endpoint = 'https://sandbox.clicksign.com';
-                            widget.origin = window.origin;
-                            widget.mount('container');
-
-                            widget.on('loaded', function(event) { console.log('Widget carregado!'); });
-                            widget.on('signed', function(event) { console.log('Documento assinado!'); });
-                            widget.on('resized', function(event) {
-                                console.log('resized!');
-                                document.getElementById('container').style.height = event.data.height + 'px';
-                            });
-                        };
+                           
                     </script> -->
                 </div>
             </div>
