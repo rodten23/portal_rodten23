@@ -25,7 +25,10 @@ headers = {
 
 
 def create_document(
-    envelope_id, enterprise_name, name_signer, documentation_signer
+    envelope_id,
+    name_signer,
+    documentation_signer,
+    enterprise_name='Melhor Opção Ltda',
 ):
     create_document_url = f'{base_url}/envelopes/{envelope_id}/documents'
 

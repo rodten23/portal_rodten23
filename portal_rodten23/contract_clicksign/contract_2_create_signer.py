@@ -4,7 +4,6 @@ import os
 import httpx
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 base_url = os.getenv('BASE_URL')
@@ -19,7 +18,13 @@ headers = {
 }
 
 
-def create_signer(envelope_id, person_name, emailInput, person_document):
+# O nº de CPF 868.872.680-94 foi criado de forma aleatória exclusivamente para testes de criação de contratos.
+def create_signer(
+    envelope_id,
+    emailInput,
+    person_name='Cliente Testador do Brasil',
+    person_document='868.872.680-94',
+):
     create_signer_url = f'{base_url}/envelopes/{envelope_id}/signers'
 
     body_signer = json.dumps({
