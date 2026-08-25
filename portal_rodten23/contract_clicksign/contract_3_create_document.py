@@ -26,11 +26,20 @@ headers = {
 
 def create_document(
     envelope_id,
-    name_signer,
-    documentation_signer,
-    enterprise_name='Melhor Opção Ltda',
+    person_name,
+    person_document,
+    enterprise_name,
 ):
     create_document_url = f'{base_url}/envelopes/{envelope_id}/documents'
+
+    if person_name == '':
+        person_name = 'Cliente Testador do Brasil'
+
+    if person_document == '':
+        person_document = '868.872.680-94'
+
+    if enterprise_name == '':
+        enterprise_name = 'Melhor Opção Ltda'
 
     current_date = create_deadline()['current_date']
 
@@ -59,8 +68,8 @@ def create_document(
                     'key': template_id,
                     'data': {
                         'enterprise': enterprise_name,
-                        'signer_name': name_signer,
-                        'signer_document': documentation_signer,
+                        'signer_name': person_name,
+                        'signer_document': person_document,
                         'created_day_contract': current_date.day,
                         'created_month_contract': months[current_date.month],
                         'created_year_contract': current_date.year,

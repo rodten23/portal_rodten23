@@ -144,7 +144,7 @@ def contract():
 
         id_signer = signer['id_signer']
 
-        id_document = create_document(envelope_id = envelope_id, enterprise_name = form_Contract.enterprise_name, name_signer = form_Contract.person_name, documentation_signer = form_Contract.person_document)
+        id_document = create_document(envelope_id = envelope_id, enterprise_name = form_Contract.enterprise_name, person_name = form_Contract.person_name, person_document = form_Contract.person_document)
 
         id_qualify_signer = qualify_signer(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
 

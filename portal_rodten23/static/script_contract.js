@@ -1,6 +1,7 @@
 // Form validation & submit
 const form = document.getElementById('contractForm');
- 
+const btn = document.getElementById('submitBtn');
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
  
@@ -10,7 +11,7 @@ form.addEventListener('submit', (e) => {
     const terms = document.getElementById('termsCheck');
     let valid = true;
  
-    // Email
+    // Email (Obrigatório)
     if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
         email.classList.add('is-invalid');
         email.classList.remove('is-valid');
@@ -20,55 +21,37 @@ form.addEventListener('submit', (e) => {
         email.classList.add('is-valid');
     }
 
-    // person_name
-    // O regex garante: 3 letras iniciais, 1 espaço obrigatório e o restante aceitando letras e espaços.
-    // O "person_name.value.length <= 45" garante o limite máximo de tamanho.
-    if (!person_name.value || person_name.value.length > 45 || !/^[A-Za-zÀ-ÿ]{3,}\s[A-Za-zÀ-ÿ\s]*$/.test(person_name.value)) {
-        person_name.classList.add('is-invalid');
-        person_name.classList.remove('is-valid');
-        valid = false;
+    // person_name (Opcional - valida apenas se houver texto)
+    if (person_name.value.trim() !== "") {
+        if (person_name.value.length > 45 || !/^[A-Za-zÀ-ÿ]{3,}\s[A-Za-zÀ-ÿ\s]*$/.test(person_name.value)) {
+            person_name.classList.add('is-invalid');
+            person_name.classList.remove('is-valid');
+            valid = false;
+        } else {
+            person_name.classList.remove('is-invalid');
+            person_name.classList.add('is-valid');
+        }
     } else {
-        person_name.classList.remove('is-invalid');
-        person_name.classList.add('is-valid');
+        // Se estiver vazio, limpa as classes de validação e permite o envio
+        person_name.classList.remove('is-invalid', 'is-valid');
     }
 
-
-
-    // if (!person_name.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(person_name.value)) {
-    //     person_name.classList.add('is-invalid');
-    //     person_name.classList.remove('is-valid');
-    //     valid = false;
-    // } else {
-    //     person_name.classList.remove('is-invalid');
-    //     person_name.classList.add('is-valid');
-    // }
-
-    // person_document
-    let pdValue = e.target.person_document.value.replace(/\D/g, ''); // Remove tudo que não é número
-    
-    // Aplica a formatação por blocos de dígitos
-    if (pdValue.length > 3 && pdValue.length <= 6) {
-        pdValue = pdValue.replace(/^(\d{3})(\d+)/, '$1.$2');
-    } else if (pdValue.length > 6 && pdValue.length <= 9) {
-        pdValue = pdValue.replace(/^(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
-    } else if (pdValue.length > 9) {
-        pdValue = pdValue.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-    }
-    
-    // Limita o tamanho máximo ao formato do CPF
-    e.target.person_document.value = person_document.value.substring(0, 14);
-
-    if (!person_document.value || !validaCPF(person_document.value)) {
-        person_document.classList.add('is-invalid');
-        person_document.classList.remove('is-valid');
-        valid = false;
+    // person_document (Opcional - valida apenas se houver texto)
+    if (person_document.value.trim() !== "") {
+        if (!validaCPF(person_document.value)) {
+            person_document.classList.add('is-invalid');
+            person_document.classList.remove('is-valid');
+            valid = false;
+        } else {
+            person_document.classList.remove('is-invalid');
+            person_document.classList.add('is-valid');
+        }
     } else {
-        person_document.classList.remove('is-invalid');
-        person_document.classList.add('is-valid');
+        // Se estiver vazio, limpa as classes de validação e permite o envio
+        person_document.classList.remove('is-invalid', 'is-valid');
     }
 
-
-    // Terms
+    // Terms (Obrigatório)
     if (!terms.checked) {
         terms.classList.add('is-invalid');
         terms.classList.remove('is-valid');
@@ -80,15 +63,28 @@ form.addEventListener('submit', (e) => {
  
     if (!valid) return;
  
-    // Simulate submission
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = 'Criando contrato teste...';
-    btn.disabled = true;
+    // Enviar formulário via API
+    enviarFormulario(form, email, terms);
 });
 
-// 2. Função de cálculo matemático do CPF
+// Máscara em tempo real para o CPF
+document.getElementById('person_document').addEventListener('input', function (e) {
+    let pdValue = e.target.value.replace(/\D/g, ''); 
+    
+    if (pdValue.length > 3 && pdValue.length <= 6) {
+        pdValue = pdValue.replace(/^(\d{3})(\d+)/, '$1.$2');
+    } else if (pdValue.length > 6 && pdValue.length <= 9) {
+        pdValue = pdValue.replace(/^(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
+    } else if (pdValue.length > 9) {
+        pdValue = pdValue.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+    }
+    
+    e.target.value = pdValue.substring(0, 14); 
+});
+
+// Função de cálculo matemático do CPF
 function validaCPF(cpf) {
-    cpf = cpf.replace(/[^\d]+/g, ''); // Limpa a máscara para validar
+    cpf = cpf.replace(/[^\d]+/g, ''); 
     
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
     
@@ -107,51 +103,53 @@ function validaCPF(cpf) {
     return true;
 }
 
+// Função para enviar os dados para o Flask
+function enviarFormulario(formElement, email, terms) {
+    btn.textContent = 'Criando contrato teste...';
+    btn.disabled = true;
 
+    const formData = new FormData(formElement);
 
-
-
-
-
-
-// function enviarFormulario(event) {
-//     if (event) event.preventDefault();
-
-//     const form = document.getElementById('contractForm');
-//     const formData = new FormData(form);
-
-//     fetch('/contract', {
-//         method:'POST',
-//         body: FormData(form)
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.id_signer) {
-//             console.log('Novo idSigner recebido:', data.id_signer);
-//             renderizarWidget(data.id_signer);
-//         } else {
-//             setTimeout(() => {
-//                 console.error('O Flask não enviou a chave redirect:', data)
-//                 btn.textContent = 'Tente novamente!';
-//                 btn.disabled = false;
-//                 form.reset();
-//                 email.classList.remove('is-valid');
-//                 email.classList.remove('is-invalid');
-//                 terms.classList.remove('is-valid');
-//                 terms.classList.remove('is-invalid');
-//             }, 5000);
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Erro:', error);
-//         btn.textContent = 'Erro ao criar contrato!';
-//         btn.disabled = false;
-//     });    
-// });
+    fetch('/contract', {
+        method: 'POST',
+        body: formData 
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Erro na resposta do servidor');
+        return response.json();
+    })
+    .then(data => {
+        if (data.id_signer) {
+            console.log('Novo idSigner recebido:', data.id_signer);
+            if (typeof renderizarWidget === 'function') {
+                renderizarWidget(data.id_signer);
+            }
+        } else {
+            setTimeout(() => {
+                console.error('O Flask não enviou a chave id_signer:', data);
+                btn.textContent = 'Tente novamente!';
+                btn.disabled = false;
+                formElement.reset();
+                [email, terms, document.getElementById('person_name'), document.getElementById('person_document')].forEach(el => {
+                    el.classList.remove('is-valid', 'is-invalid');
+                });
+            }, 5000);
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        btn.textContent = 'Erro ao criar contrato!';
+        btn.disabled = false;
+    });    
+}
  
-// Remove invalid on input
-['emailInput', 'termsCheck'].forEach(id => {
-    document.getElementById(id).addEventListener('input', function () {
-        this.classList.remove('is-invalid');
-    });
+// Limpar classes inválidas ao digitar/interagir
+['emailInput', 'person_name', 'person_document', 'termsCheck'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+        const eventType = el.type === 'checkbox' ? 'change' : 'input';
+        el.addEventListener(eventType, function () {
+            this.classList.remove('is-invalid');
+        });
+    }
 });

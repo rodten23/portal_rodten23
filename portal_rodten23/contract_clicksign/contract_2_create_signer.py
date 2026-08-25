@@ -22,10 +22,16 @@ headers = {
 def create_signer(
     envelope_id,
     emailInput,
-    person_name='Cliente Testador do Brasil',
-    person_document='868.872.680-94',
+    person_name,
+    person_document,
 ):
     create_signer_url = f'{base_url}/envelopes/{envelope_id}/signers'
+
+    if person_name == '':
+        person_name = 'Cliente Testador do Brasil'
+
+    if person_document == '':
+        person_document = '868.872.680-94'
 
     body_signer = json.dumps({
         'data': {
