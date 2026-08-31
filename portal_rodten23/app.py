@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from datetime import date
 from portal_rodten23.calculate_datetime import calculate_age
 import os
+import re
 
 from portal_rodten23.contract_clicksign.contract_1_create_envelope import (
     create_envelope,
@@ -65,9 +66,10 @@ class Contato:
 
 class Contract:
     def __init__(
-        self, emailInput, person_name, person_document, enterprise_name
+        self, emailInput, termsCheck, person_name, person_document, enterprise_name
     ):
         self.emailInput = emailInput
+        self.termsCheck = termsCheck
         self.person_name = person_name
         self.person_document = person_document
         self.enterprise_name = enterprise_name
@@ -124,6 +126,38 @@ def send():
 
     return redirect('/')
 
+def valida_cpf(cpf: str) -> bool:
+
+    if cpf == '':
+        return True
+
+    else:
+        """Aplica o cálculo matemático oficial para validar um CPF brasileiro."""
+        # 1. Remove qualquer caractere que não seja número
+        cpf = re.sub(r'\D', '', cpf)
+    
+        # 2. Verifica se tem 11 dígitos ou se é uma sequência repetida explícita
+        if len(cpf) != 11 or cpf == cpf[0] * 11:
+            return False
+        
+        # 3. Cálculo do primeiro dígito verificador
+        soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
+        resto = (soma * 10) % 11
+        if resto in (10, 11):
+            resto = 0
+        if resto != int(cpf[9]):
+            return False
+        
+        # 4. Cálculo do segundo dígito verificador
+        soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
+        resto = (soma * 10) % 11
+        if resto in (10, 11):
+            resto = 0
+        if resto != int(cpf[10]):
+            return False
+        
+        return True
+
 
 @app.route('/contract', methods=['GET', 'POST'])
 def contract():
@@ -133,46 +167,76 @@ def contract():
     if request.method == 'POST':
         form_Contract = Contract(
             request.form.get('emailInput'),
+            request.form.get('termsCheck'),
             request.form.get('person_name'),
             request.form.get('person_document'),
             request.form.get('enterprise_name'),
         )
 
-        envelope_id = create_envelope()
+        # Validação dos campos obrigatórios
+        if not form_Contract.emailInput or not form_Contract.termsCheck:
+            return jsonify({
+                'error': 'validation_error',
+                'message': 'E-mail e termos de uso são obrigatórios.'
+        }), 400
 
-        signer = create_signer(envelope_id = envelope_id, person_name = form_Contract.person_name, emailInput = form_Contract.emailInput, person_document = form_Contract.person_document)
+        # Validação do CPF opcional (só valida se o usuário tiver preenchido)
+        if form_Contract.person_document:
+            if not valida_cpf(form_Contract.person_document):
+            # Retorna erro 400 (Bad Request) se o CPF for inválido
+                return jsonify({
+                    'error': 'invalid_cpf',
+                    'message': 'O CPF fornecido é inválido.'
+            }), 400
 
-        id_signer = signer['id_signer']
+        try:
 
-        id_document = create_document(envelope_id = envelope_id, enterprise_name = form_Contract.enterprise_name, person_name = form_Contract.person_name, person_document = form_Contract.person_document)
+            envelope_id = create_envelope()
 
-        id_qualify_signer = qualify_signer(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
+            signer = create_signer(envelope_id = envelope_id, person_name = form_Contract.person_name, emailInput = form_Contract.emailInput, person_document = form_Contract.person_document)
 
-        id_define_rubric = define_rubric(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
+            id_signer = signer['id_signer']
 
-        id_define_authentication = define_authentication(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
+            id_document = create_document(envelope_id = envelope_id, enterprise_name = form_Contract.enterprise_name, person_name = form_Contract.person_name, person_document = form_Contract.person_document)
 
-        activated_envelope = activate_envelope(envelope_id = envelope_id)
+            id_qualify_signer = qualify_signer(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
 
-        notification = notify_signature(envelope_id = envelope_id)
+            id_define_rubric = define_rubric(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
 
-        print(envelope_id)
+            id_define_authentication = define_authentication(envelope_id = envelope_id, id_document = id_document, id_signer = id_signer)
 
-        print(id_signer)
+            activated_envelope = activate_envelope(envelope_id = envelope_id)
 
-        print(id_document)
+            notification = notify_signature(envelope_id = envelope_id)
 
-        print(id_qualify_signer)
+            print(envelope_id)
 
-        print(id_define_rubric)
+            print(id_signer)
 
-        print(id_define_authentication)
+            print(id_document)
 
-        print(activated_envelope['id_activated_envelope'], activated_envelope['status_activated_envelope'],)
+            print(id_qualify_signer)
 
-        print(notification['id_notification'], notification['notification_message'])
+            print(id_define_rubric)
 
-        return jsonify({"id_signer": id_signer})
+            print(id_define_authentication)
+
+            print(activated_envelope['id_activated_envelope'], activated_envelope['status_activated_envelope'],)
+
+            print(notification['id_notification'], notification['notification_message'])
+
+            return jsonify({
+                'success': True,
+                'id_signer': id_signer,
+                'message': 'Contrato teste criado com sucesso!'
+            }), 200
+
+        except Exception as e:
+            print(f'Erro interno: {str(e)}')
+            return jsonify({
+                'error': 'internal_error',
+                'message': 'Erro ao processar o contrato no servidor.'
+            }), 500
 
         # return render_template(
         #     'contract.html',

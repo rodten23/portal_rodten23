@@ -5,25 +5,27 @@ const btn = document.getElementById('submitBtn');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
  
-    const email = document.getElementById('emailInput');
+    const emailInput = document.getElementById('emailInput');
     const person_name = document.getElementById('person_name');
     const person_document = document.getElementById('person_document');
-    const terms = document.getElementById('termsCheck');
+    const enterprise_name = document.getElementById('enterprise_name');
+    const termsCheck = document.getElementById('termsCheck');
     let valid = true;
  
     // Email (Obrigatório)
-    if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-        email.classList.add('is-invalid');
-        email.classList.remove('is-valid');
+    if (!emailInput.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        emailInput.classList.add('is-invalid');
+        emailInput.classList.remove('is-valid');
         valid = false;
     } else {
-        email.classList.remove('is-invalid');
-        email.classList.add('is-valid');
+        emailInput.classList.remove('is-invalid');
+        emailInput.classList.add('is-valid');
     }
 
     // person_name (Opcional - valida apenas se houver texto)
-    if (person_name.value.trim() !== "") {
-        if (person_name.value.length > 45 || !/^[A-Za-zÀ-ÿ]{3,}\s[A-Za-zÀ-ÿ\s]*$/.test(person_name.value)) {
+    const nomeTexto = person_name.value.trim();
+    if (nomeTexto !== "") {
+        if (nomeTexto.length > 45 || !/^[A-Za-zÀ-ÿ]{3,}\s[A-Za-zÀ-ÿ\s]*$/.test(nomeTexto)) {
             person_name.classList.add('is-invalid');
             person_name.classList.remove('is-valid');
             valid = false;
@@ -37,8 +39,9 @@ form.addEventListener('submit', (e) => {
     }
 
     // person_document (Opcional - valida apenas se houver texto)
-    if (person_document.value.trim() !== "") {
-        if (!validaCPF(person_document.value)) {
+    const cpfTexto = person_document.value.trim();
+    if (cpfTexto !== "") {
+        if (!validaCPF(cpfTexto)) {
             person_document.classList.add('is-invalid');
             person_document.classList.remove('is-valid');
             valid = false;
@@ -52,19 +55,22 @@ form.addEventListener('submit', (e) => {
     }
 
     // Terms (Obrigatório)
-    if (!terms.checked) {
-        terms.classList.add('is-invalid');
-        terms.classList.remove('is-valid');
+    if (!termsCheck.checked) {
+        termsCheck.classList.add('is-invalid');
+        termsCheck.classList.remove('is-valid');
         valid = false;
     } else {
-        terms.classList.remove('is-invalid');
-        terms.classList.add('is-valid');
+        termsCheck.classList.remove('is-invalid');
+        termsCheck.classList.add('is-valid');
     }
  
-    if (!valid) return;
+    if (!valid) {
+        console.warn("Envio bloqueado: Existem campos inválidos no formulário.");
+        return;
+    }
  
     // Enviar formulário via API
-    enviarFormulario(form, email, terms);
+    enviarFormulario(form, emailInput, termsCheck, person_name, person_document, enterprise_name);
 });
 
 // Máscara em tempo real para o CPF
@@ -104,15 +110,15 @@ function validaCPF(cpf) {
 }
 
 // Função para enviar os dados para o Flask
-function enviarFormulario(formElement, email, terms) {
+function enviarFormulario(formElement, emailInput, termsCheck, person_name, person_document, enterprise_name) {
     btn.textContent = 'Criando contrato teste...';
     btn.disabled = true;
 
-    const formData = new FormData(formElement);
+    // const formData = new FormData(formElement);
 
     fetch('/contract', {
         method: 'POST',
-        body: formData 
+        body: new FormData(formElement)
     })
     .then(response => {
         if (!response.ok) throw new Error('Erro na resposta do servidor');
@@ -121,28 +127,69 @@ function enviarFormulario(formElement, email, terms) {
     .then(data => {
         if (data.id_signer) {
             console.log('Novo idSigner recebido:', data.id_signer);
-            if (typeof renderizarWidget === 'function') {
-                renderizarWidget(data.id_signer);
-            }
+            btn.textContent = 'Criar Contrato Teste'; // Restaura o botão após sucesso
+            btn.disabled = false;
+            // if (typeof renderizarWidget === 'function') {
+            //     renderizarWidget(data.id_signer);
+            // }
+            renderizarWidget(data.id_signer);
         } else {
             setTimeout(() => {
                 console.error('O Flask não enviou a chave id_signer:', data);
                 btn.textContent = 'Tente novamente!';
                 btn.disabled = false;
-                formElement.reset();
-                [email, terms, document.getElementById('person_name'), document.getElementById('person_document')].forEach(el => {
-                    el.classList.remove('is-valid', 'is-invalid');
+                // formElement.reset();
+                [emailInput, termsCheck, person_name, person_document].forEach(el => {
+                    if (el) el.classList.remove('is-valid', 'is-invalid');
                 });
-            }, 5000);
+            }, 3000);
         }
     })
     .catch(error => {
         console.error('Erro:', error);
         btn.textContent = 'Erro ao criar contrato!';
-        btn.disabled = false;
+        setTimeout(() => {
+            btn.textContent = 'Criar Contrato Teste';
+            btn.disabled = false;
+        }, 3000);
     });    
 }
- 
+
+// Integração Front-end: Gerenciamento do Widget Embedded da Clicksign
+var widgetInstance = null;
+
+function renderizarWidget(idSigner) {
+    if (!idSigner) {
+        console.error('Nenhum idSigner recebido do Flask ainda.');
+        return;
+    }
+
+    const container = document.getElementById('container');
+
+    if (widgetInstance) {
+        try {
+            widgetInstance.unmount();
+        } catch (e) {
+            console.log('Erro ao desmontar widget anterior:', e);
+        }
+    }
+
+    container.innerHTML = '';
+
+    widgetInstance = new Clicksign(idSigner);
+    widgetInstance.endpoint = 'https://sandbox.clicksign.com';
+    widgetInstance.origin = window.location.origin;
+    widgetInstance.mount('container');
+
+    widgetInstance.on('loaded', function(event) { 
+        console.log('Widget Clicksign carregado com sucesso!'); 
+    });
+
+    widgetInstance.on('signed', function(event) {
+        console.log('Documento assinado com sucesso pelo usuário!');
+    });
+}
+
 // Limpar classes inválidas ao digitar/interagir
 ['emailInput', 'person_name', 'person_document', 'termsCheck'].forEach(id => {
     const el = document.getElementById(id);
