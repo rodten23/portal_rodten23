@@ -110,7 +110,7 @@
                                 required
                             />
                             <label class="form-check-label" for="termsCheck">
-                                Ao continuar, você aceita os <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>
+                                Ao continuar, você aceita os <a href="{{ url_for('terms_service_contract') }}" target="_blank">Termos de Serviço</a> e <a href="{{ url_for('privacy_policy_contract') }}" target="_blank">Política de Privacidade</a>
                             </label>
                             <div class="invalid-feedback">Necessário aceitar os termos.</div>
                         </div>

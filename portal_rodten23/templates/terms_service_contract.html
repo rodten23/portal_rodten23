@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../static/img/rodrigo_favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Termos de Serviço - Contrato Teste</title>
+    <style>
+        body { background-color: #f8f9fa; color: #333; }
+        .legal-card { border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                
+                <!-- Botão Voltar -->
+                <div class="mb-4">
+                    <a href="{{ url_for('contract') }}" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Voltar para a Aplicação
+                    </a>
+                </div>
+
+                <!-- Cartão do Documento -->
+                <div class="card legal-card border-0 p-4 p-md-5">
+                    <div class="card-body">
+                        
+                        <div class="text-center mb-5">
+                            <span class="badge bg-secondary mb-2">Documento Jurídico / Acadêmico</span>
+                            <h1 class="display-6 fw-bold text-dark">Termos de Serviço</h1>
+                            <p class="text-muted small">Última atualização: Setembro de 2026</p>
+                        </div>
+
+                        <p class="lead">
+                            Seja bem-vindo ao portfólio de desenvolvimento de software de <strong>Rodrigo Alves Tenório</strong> ("Desenvolvedor").
+                        </p>
+                        <p>
+                            Ao utilizar a aplicação demonstrativa de integração com a API da Clicksign ("Aplicação"), você concorda expressamente com os presentes Termos de Serviço. Caso não concorde com qualquer disposição aqui descrita, orientamos que não utilize a ferramenta.
+                        </p>
+
+                        <hr class="my-4 text-secondary opacity-25">
+
+                        <h3 class="h5 fw-bold text-dark mt-4">1. Objeto e Natureza Exclusivamente Demonstrativa</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>1.1.</strong> Esta Aplicação foi desenvolvida com propósito estritamente acadêmico, técnico e de demonstração de competências de engenharia de software para o portfólio profissional do Desenvolvedor.<br>
+                            <strong>1.2.</strong> O formulário e a janela de assinatura eletrônica simulam a criação de um documento digital através do ambiente de testes (<em>Sandbox</em>) fornecido pela plataforma Clicksign.<br>
+                            <strong>1.3. Ausência de Efeito Jurídico:</strong> Qualquer documento, minuta ou assinatura gerada através desta Aplicação é <strong>juridicamente nula, inválida e desprovida de quaisquer efeitos no mundo real</strong>. A utilização desta ferramenta não cria, modifica ou extingue direitos, nem estabelece vínculo contratual, comercial ou profissional de qualquer natureza entre o usuário e o Desenvolvedor.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">2. Uso Estrito de Dados Fictícios e Isenção sobre o CPF 868.872.680-94</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>2.1.</strong> O usuário é expressamente orientado a <strong>não inserir dados reais</strong> (tais como nome, CPF ou nome de empresa) nos campos do formulário, com exceção de um endereço de e-mail válido para o recebimento exclusivo do Token OTP de testes enviado pela Clicksign.<br>
+                            <strong>2.2. Declaração de Alocação de CPF Ilustrativo:</strong> Fica expressamente declarado e estabelecido que o número de CPF <strong>868.872.680-94</strong> constante, sugerido ou utilizado na execução e na interface deste cenário de testes possui finalidade <strong>meramente ilustrativa, figurativa e computacional</strong>.<br>
+                            <strong>2.3.</strong> O uso do referido numeral ocorre sem qualquer intuito de simulação de identidade de terceiros, sem intenção de fraude, sem auferimento de vantagens econômicas, sem geração de custos, cobranças ou quaisquer implicações jurídicas ou financeiras.<br>
+                            <strong>2.4.</strong> Na remota hipótese de a combinação numérica constante no item 2.2 corresponder ao cadastro de uma pessoa física real no mundo físico, as partes reconhecem que tal fato constitui mera <strong>coincidência estatística de natureza estocástica</strong>. O Desenvolvedor exime-se de qualquer responsabilidade por eventuais associações indevidas, restando claro o seu total desinteresse e ausência de dolo em relação a qualquer titular legítimo.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">3. Responsabilidade sobre Serviços de Terceiros</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>3.1.</strong> Esta aplicação consome APIs e bibliotecas externas de propriedade e responsabilidade da empresa Clicksign (Clicksign Gestão de Documentos S.A., inscrita no CNPJ/MF sob o nº 12.499.520/0001-70).<br>
+                            <strong>3.2.</strong> O Desenvolvedor não possui gerência, controle ou responsabilidade sobre a infraestrutura da Clicksign, a entrega de e-mails de validação (OTP), a estabilidade do <em>widget</em> embutido ou o tratamento de dados realizado nos servidores da referida empresa.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">4. Limitação de Responsabilidade</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>4.1.</strong> Em nenhuma hipótese o Desenvolvedor será responsável por danos diretos, indiretos, incidentais ou consequenciais decorrentes do uso — ou da incapacidade de uso — desta Aplicação de testes.<br>
+                            <strong>4.2.</strong> O serviço é disponibilizado "como está" (<em>as is</em>), sem garantias de funcionamento ininterrupto ou livre de falhas de rede de terceiros.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">5. Foro de Eleição</h3>
+                        <p class="ps-3 text-secondary mb-0">
+                            <strong>5.1.</strong> Para dirimir quaisquer dúvidas ou controvérsias oriundas deste instrumento, fica eleito o foro da comarca de domicílio do Desenvolvedor, com renúncia expressa a qualquer outro por mais privilegiado que seja.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-muted small">&copy; {{ ano_corrente }} - Rodrigo Alves Tenório. Desenvolvido para fins de portfólio.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
