@@ -164,6 +164,18 @@ def valida_cpf(cpf: str) -> bool:
         return True
 
 
+@app.route('/terms_service_contract')
+def terms_service_contract():
+    current_date = date.today()
+    return render_template('terms_service_contract.html', ano_corrente=current_date.year)
+
+
+@app.route('/privacy_policy_contract')
+def privacy_policy_contract():
+    current_date = date.today()
+    return render_template('privacy_policy_contract.html', ano_corrente=current_date.year)
+
+
 @app.route('/contract', methods=['GET', 'POST'])
 def contract():
     if request.method == 'GET':
