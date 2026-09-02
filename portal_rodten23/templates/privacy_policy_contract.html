@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../static/img/rodrigo_favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Política de Privacidade - Contrato Teste</title>
+    <style>
+        body { background-color: #f8f9fa; color: #333; }
+        .legal-card { border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                
+                <!-- Botão Voltar -->
+                <div class="mb-4">
+                    <a href="{{ url_for('contract') }}" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Voltar para a Aplicação
+                    </a>
+                </div>
+
+                <!-- Cartão do Documento -->
+                <div class="card legal-card border-0 p-4 p-md-5">
+                    <div class="card-body">
+                        
+                        <div class="text-center mb-5">
+                            <span class="badge bg-success mb-2">Conformidade LGPD</span>
+                            <h1 class="display-6 fw-bold text-dark">Política de Privacidade</h1>
+                            <p class="text-muted small">Última atualização: Setembro de 2026</p>
+                        </div>
+
+                        <p class="lead">
+                            Esta Política de Privacidade descreve como os dados são tratados na aplicação demonstrativa de integração com a API da Clicksign disponível no portfólio profissional de <strong>Rodrigo Alves Tenório</strong> ("Desenvolvedor"), em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
+                        </p>
+
+                        <hr class="my-4 text-secondary opacity-25">
+
+                        <h3 class="h5 fw-bold text-dark mt-4">1. Princípio da Minimização e Não-Retenção de Dados</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>1.1.</strong> Alinhado ao princípio da minimização de dados da LGPD, esta Aplicação foi projetada para <strong>não armazenar</strong> nenhuma informação inserida no formulário de testes em banco de dados local ou servidores próprios do Desenvolvedor.<br>
+                            <strong>1.2.</strong> O Desenvolvedor não coleta, não cria perfis (<em>profiling</em>), não comercializa e não compartilha dados pessoais com fins lucrativos ou de marketing.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">2. Dados Coletados e Finalidade Específica</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>2.1.</strong> A Aplicação coleta temporariamente em memória os seguintes dados informados pelo usuário:<br>
+                        </p>
+                        <ul class="ms-4 text-secondary">
+                            <li><strong>Endereço de E-mail:</strong> Utilizado com a finalidade exclusiva de viabilizar o disparo técnico do Token OTP (One-Time Password) pela API de Sandbox da Clicksign, permitindo a conclusão da experiência prática de assinatura.</li>
+                            <li><strong>Nome, CPF e Nome de Empresa Fictícios:</strong> Tratados de forma efêmera apenas para compor as variáveis textuais transmitidas via API e renderizadas na tela do documento de simulação.</li>
+                        </ul>
+                        <p class="ps-3 text-secondary">
+                            <strong>2.2.</strong> O usuário é advertido a preencher os campos com dados fictícios. Conforme definido nos Termos de Serviço, dados numéricos específicos exibidos ou gerados pela aplicação — como o CPF <strong>868.872.680-94</strong> — possuem caráter puramente ilustrativo/computacional, não correspondendo a tratamento de dados de pessoa natural identificada ou identificável por parte deste site.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">3. Compartilhamento com Operadores de Dados (Clicksign)</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>3.1.</strong> Ao clicar em "Criar Contrato Teste", os dados inseridos são transmitidos diretamente para o ambiente de testes (<em>Sandbox</em>) da plataforma <strong>Clicksign</strong> (Clicksign Gestão de Documentos S.A., inscrita no CNPJ/MF sob o nº 12.499.520/0001-70), que atua como fornecedora da tecnologia de assinatura digital.<br>
+                            <strong>3.2.</strong> O processing dessas informações pela Clicksign segue as diretrizes, termos e políticas de privacidade da própria plataforma parceira (disponíveis em seus canais oficiais e documentação de desenvolvedores).
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">4. Segurança da Informação</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>4.1.</strong> Embora os dados não sejam guardados em base local, o tráfego de dados entre o navegador do usuário e as APIs integradas é protegido por criptografia de transporte (HTTPS).<br>
+                            <strong>4.2.</strong> Por se tratar de um ambiente puramente demonstrativo e público de portfólio, o usuário reconhece os riscos intrínsecos de tráfego na internet e é incentivado a utilizar apenas dados genéricos/fictícios no formulário.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">5. Direitos do Titular dos Dados</h3>
+                        <p class="ps-3 text-secondary">
+                            <strong>5.1.</strong> Uma vez que esta aplicação não retém ou armazena dados em caráter permanente, o Desenvolvedor não possui histórico de dados a ser extraído, corrigido, portado ou excluído a pedido do usuário após o encerramento da sessão de navegação.
+                        </p>
+
+                        <h3 class="h5 fw-bold text-dark mt-4">6. Contato</h3>
+                        <p class="ps-3 text-secondary mb-0">
+                            <strong>6.1.</strong> Para qualquer esclarecimento sobre a natureza técnica desta aplicação, o usuário poderá entrar em contato através dos canais profissionais disponibilizados na página principal deste portfólio.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-muted small">&copy; {{ ano_corrente }} - Rodrigo Alves Tenório. Desenvolvido para fins de portfólio.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
