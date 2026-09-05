@@ -200,3 +200,30 @@ function renderizarWidget(idSigner) {
         });
     }
 });
+
+
+function verificarStatus() {
+    fetch('/checar-status')
+        .then(response => response.json())
+        .then(data => {
+            if (data.disponivel) {
+                // 1. Injeta a URL recebida no atributo 'href' do link
+                document.getElementById('btn-download').href = data.url;
+                        
+                // 2. Ativa o botão e muda o texto
+                const botao = document.getElementById('meu-botao');
+                botao.disabled = false;
+                botao.innerText = "Baixar Arquivo Agora";
+                        
+                // 3. Atualiza o texto de status
+                document.getElementById('status').innerText = "Arquivo liberado com sucesso!";
+                        
+                // Parar de consultar o servidor já que o arquivo chegou
+                clearInterval(intervalo);
+            }
+        })
+        .catch(err => console.error("Erro ao checar status:", err));
+}
+
+// Executa a função a cada 3000 milissegundos (3 segundos)
+const intervalo = setInterval(verificarStatus, 3000);
