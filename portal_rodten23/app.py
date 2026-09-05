@@ -38,6 +38,8 @@ from portal_rodten23.contract_clicksign.contract_8_notify_signature import (
     notify_signature,
 )
 
+from portal_rodten23.webhook_response import check_clicksign_response
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -281,6 +283,11 @@ def contract():
                 'error': 'internal_error',
                 'message': 'Erro ao processar o contrato no servidor.',
             }), 500
+
+
+app.route('/check_response_clicksign', methods=['GET'])
+check_clicksign_response() # ~ 30segs
+
 
         # return render_template(
         #     'contract.html',
