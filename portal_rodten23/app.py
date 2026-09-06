@@ -38,7 +38,7 @@ from portal_rodten23.contract_clicksign.contract_8_notify_signature import (
     notify_signature,
 )
 
-from portal_rodten23.webhook_response import check_clicksign_response
+from portal_rodten23.webhook_response import clicksign_webhook_validator
 
 load_dotenv()
 
@@ -57,6 +57,8 @@ mail_settings = {
 app.config.update(mail_settings)
 
 mail = Mail(app)
+
+signed_file_clicksign = {'download_url': None}
 
 
 class Contato:
@@ -285,8 +287,26 @@ def contract():
             }), 500
 
 
-app.route('/check_response_clicksign', methods=['GET'])
-check_clicksign_response() # ~ 30segs
+@app.route('/check_response_clicksign', methods=['GET'])
+def check_clicksign_response():  # ~ 30segs
+    if signed_file_clicksign['download_url']:
+        return jsonify({
+            'signed_file_available': True,
+            'url': signed_file_clicksign['download_url'],
+        }), 200
+    return jsonify({'signed_file_available': False}), 200
+
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    clicksign_response = clicksign_webhook_validator()
+
+    signed_file_clicksign['download_url'] = clicksign_response['download_url']
+
+    return jsonify(clicksign_response), 200
+
+    
+
 
 
         # return render_template(
