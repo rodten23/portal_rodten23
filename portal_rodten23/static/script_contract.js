@@ -1,6 +1,8 @@
 // Form validation & submit
 const form = document.getElementById('contractForm');
 const btn = document.getElementById('submitBtn');
+const btnPDF = document.getElementById('btn-pdf');
+const statusDownload = document.getElementById('status');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -202,28 +204,29 @@ function renderizarWidget(idSigner) {
 });
 
 
-function verificarStatus() {
-    fetch('/checar-status')
+function checkResponseClicksign() {
+    fetch('/check_response_clicksign')
         .then(response => response.json())
         .then(data => {
-            if (data.disponivel) {
-                // 1. Injeta a URL recebida no atributo 'href' do link
-                document.getElementById('btn-download').href = data.url;
-                        
-                // 2. Ativa o botão e muda o texto
-                const botao = document.getElementById('meu-botao');
-                botao.disabled = false;
-                botao.innerText = "Baixar Arquivo Agora";
+            if (data.signed_file_available) {                 
+                // 1. Ativa o botão e muda o texto
+                btnPDF.disabled = false;
+                btnPDF.innerText = "Baixar Contrato Teste Assinado";
+
+                // 2. Adiciona o evento de clique para abrir o link em nova aba
+                btnPDF.onclick = function() {
+                    window.open(data.url, '_blank');
+                };
                         
                 // 3. Atualiza o texto de status
-                document.getElementById('status').innerText = "Arquivo liberado com sucesso!";
+                statusDownload.innerText = "Arquivo gerado com sucesso!";
                         
                 // Parar de consultar o servidor já que o arquivo chegou
-                clearInterval(intervalo);
+                clearInterval(interval);
             }
         })
         .catch(err => console.error("Erro ao checar status:", err));
 }
 
 // Executa a função a cada 3000 milissegundos (3 segundos)
-const intervalo = setInterval(verificarStatus, 3000);
+const interval = setInterval(checkResponseClicksign, 3000);
