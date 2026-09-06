@@ -154,6 +154,12 @@ body {
   color: #f25924;
 }
 
+.contract-footer h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f25924;
+}
+
 .form-header p {
   font-size: 0.875rem;
   color: var(--muted);
@@ -162,6 +168,13 @@ body {
 }
 
 .contract-header p {
+  font-size: 0.875rem;
+  color: black;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.contract-footer p {
   font-size: 0.875rem;
   color: black;
   margin: 0;
@@ -372,4 +385,36 @@ hr.divider {
 .legal-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* ==========================================================================
+   Estilização específica para o botão do PDF (#btn-pdf)
+   ========================================================================== */
+
+/* 1. Estado Desativado (Aguardando Webhook) */
+#btn-pdf:disabled {
+  /* Substitui a cor de fundo por um tom cinza/neutro */
+  background: #a1a1aa !important; 
+  color: #f4f4f5 !important;
+  width: 100%;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove o efeito de brilho interno (ripple) enquanto estiver desativado */
+#btn-pdf:disabled::after {
+  display: none;
+}
+
+/* 2. Customização Opcional: Estado Ativado (Quando o Webhook chega) */
+/* Se você quiser que ele mude para uma cor diferente do .btn-primary padrão (ex: Verde de sucesso) 
+   quando for liberado, descomente o trecho abaixo: */
+
+#btn-pdf:not(:disabled) {
+  background: #fc7e54; 
+}
+#btn-pdf:not(:disabled):hover {
+  background: #f25924;
+  box-shadow: 0 8px 23px rgba(23, 23, 23, 0.3);
 }

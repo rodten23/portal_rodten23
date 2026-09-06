@@ -38,6 +38,8 @@ from portal_rodten23.contract_clicksign.contract_8_notify_signature import (
     notify_signature,
 )
 
+from portal_rodten23.webhook_response import clicksign_webhook_validator
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -55,6 +57,8 @@ mail_settings = {
 app.config.update(mail_settings)
 
 mail = Mail(app)
+
+signed_file_clicksign = {'download_url': None}
 
 
 class Contato:
@@ -137,15 +141,11 @@ def valida_cpf(cpf: str) -> bool:
         return True
 
     else:
-        """Aplica o cálculo matemático oficial para validar um CPF brasileiro."""
-        # 1. Remove qualquer caractere que não seja número
         cpf = re.sub(r'\D', '', cpf)
 
-        # 2. Verifica se tem 11 dígitos ou se é uma sequência repetida explícita
         if len(cpf) != 11 or cpf == cpf[0] * 11:
             return False
 
-        # 3. Cálculo do primeiro dígito verificador
         soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
         resto = (soma * 10) % 11
         if resto in (10, 11):
@@ -153,7 +153,6 @@ def valida_cpf(cpf: str) -> bool:
         if resto != int(cpf[9]):
             return False
 
-        # 4. Cálculo do segundo dígito verificador
         soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
         resto = (soma * 10) % 11
         if resto in (10, 11):
@@ -190,14 +189,12 @@ def contract():
             request.form.get('enterprise_name'),
         )
 
-        # Validação dos campos obrigatórios
         if not form_Contract.emailInput or not form_Contract.termsCheck:
             return jsonify({
                 'error': 'validation_error',
                 'message': 'E-mail e termos de uso são obrigatórios.',
             }), 400
 
-        # Validação do CPF opcional (só valida se o usuário tiver preenchido)
         if form_Contract.person_document:
             if not valida_cpf(form_Contract.person_document):
                 # Retorna erro 400 (Bad Request) se o CPF for inválido
@@ -282,31 +279,25 @@ def contract():
                 'message': 'Erro ao processar o contrato no servidor.',
             }), 500
 
-        # return render_template(
-        #     'contract.html',
-        #     id_signer = id_signer
-        # )
 
-        # print(form_Contract.emailInput, form_Contract.person_name, form_Contract.person_document, form_Contract.enterprise_name)
-
-        # print(testar_conta())
-        # return jsonify({"redirect": "/"})
-
-
-# @app.route('/create_contract', methods=['POST'])
-# def create_contract():
-#     if request.method == 'POST':
-#         form_Contract = Contract(
-#             request.form['emailInput'],
-#             request.form['person_name'],
-#             request.form['cpf'],
-#             request.form['enterprise_name']
-#         )
-
-#         return testar_conta()
-
-#     return redirect('/')
+@app.route('/check_response_clicksign', methods=['GET'])
+def check_clicksign_response():
+    if signed_file_clicksign['download_url']:
+        return jsonify({
+            'signed_file_available': True,
+            'url': signed_file_clicksign['download_url'],
+        }), 200
+    return jsonify({'signed_file_available': False}), 200
 
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    clicksign_response = clicksign_webhook_validator()
+
+    signed_file_clicksign['download_url'] = clicksign_response['download_url']
+
+    return jsonify(clicksign_response), 200
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
