@@ -159,6 +159,7 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
 
 // Integração Front-end: Gerenciamento do Widget Embedded da Clicksign
 var widgetInstance = null;
+var clicksignInterval = null;
 
 function renderizarWidget(idSigner) {
     if (!idSigner) {
@@ -189,6 +190,14 @@ function renderizarWidget(idSigner) {
 
     widgetInstance.on('signed', function(event) {
         console.log('Documento assinado com sucesso pelo usuário!');
+
+        if (clicksignInterval) clearInterval(clicksignInterval);
+        
+        statusDownload.innerText = "Processando sua assinatura... Por favor, aguarde.";
+
+        checkResponseClicksign();
+
+        clicksignInterval = setInterval(checkResponseClicksign, 5000);
     });
 }
 
@@ -222,11 +231,11 @@ function checkResponseClicksign() {
                 statusDownload.innerText = "Arquivo gerado com sucesso!";
                         
                 // Parar de consultar o servidor já que o arquivo chegou
-                clearInterval(interval);
+                clearInterval(clicksignInterval);
+                console.log("Checagem encerrada com sucesso.");
             }
         })
-        .catch(err => console.error("Erro ao checar status:", err));
+        .catch(err => {
+            console.error("Erro ao checar status:", err)
+        });
 }
-
-// Executa a função a cada 3000 milissegundos (3 segundos)
-const interval = setInterval(checkResponseClicksign, 3000);
