@@ -163,22 +163,22 @@ def valida_cpf(cpf: str) -> bool:
         return True
 
 
-@app.route('/terms_service_contract')
-def terms_service_contract():
+@app.route('/terms_service_contract_test')
+def terms_service_contract_test():
     current_date = date.today()
-    return render_template('terms_service_contract.html', ano_corrente=current_date.year)
+    return render_template('terms_service_contract_test.html', ano_corrente=current_date.year)
 
 
-@app.route('/privacy_policy_contract')
-def privacy_policy_contract():
+@app.route('/privacy_policy_contract_test')
+def privacy_policy_contract_test():
     current_date = date.today()
-    return render_template('privacy_policy_contract.html', ano_corrente=current_date.year)
+    return render_template('privacy_policy_contract_test.html', ano_corrente=current_date.year)
 
 
-@app.route('/contract', methods=['GET', 'POST'])
-def contract():
+@app.route('/contract_test', methods=['GET', 'POST'])
+def contract_test():
     if request.method == 'GET':
-        return render_template('contract.html')
+        return render_template('contract_test.html')
 
     if request.method == 'POST':
         form_Contract = Contract(
@@ -197,7 +197,6 @@ def contract():
 
         if form_Contract.person_document:
             if not valida_cpf(form_Contract.person_document):
-                # Retorna erro 400 (Bad Request) se o CPF for inválido
                 return jsonify({
                     'error': 'invalid_cpf',
                     'message': 'O CPF fornecido é inválido.',
