@@ -118,7 +118,7 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
 
     // const formData = new FormData(formElement);
 
-    fetch('/contract', {
+    fetch('/contract_test', {
         method: 'POST',
         body: new FormData(formElement)
     })
