@@ -3,6 +3,7 @@ const form = document.getElementById('contractForm');
 const btn = document.getElementById('submitBtn');
 const btnPDF = document.getElementById('btn-pdf');
 const statusDownload = document.getElementById('status');
+let idContractSession = null;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -118,7 +119,7 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
 
     // const formData = new FormData(formElement);
 
-    fetch('/contract', {
+    fetch('/contract_test', {
         method: 'POST',
         body: new FormData(formElement)
     })
@@ -127,7 +128,8 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
         return response.json();
     })
     .then(data => {
-        if (data.id_signer) {
+        if (data.id_signer && data.id_document) {
+            idContractSession = data.id_document;
             console.log('Novo idSigner recebido:', data.id_signer);
             btn.textContent = 'Criar Contrato Teste'; // Restaura o botão após sucesso
             btn.disabled = false;
@@ -159,6 +161,7 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
 
 // Integração Front-end: Gerenciamento do Widget Embedded da Clicksign
 var widgetInstance = null;
+var clicksignInterval = null;
 
 function renderizarWidget(idSigner) {
     if (!idSigner) {
@@ -189,6 +192,14 @@ function renderizarWidget(idSigner) {
 
     widgetInstance.on('signed', function(event) {
         console.log('Documento assinado com sucesso pelo usuário!');
+
+        if (clicksignInterval) clearInterval(clicksignInterval);
+        
+        statusDownload.innerText = "Processando sua assinatura... Por favor, aguarde.";
+
+        checkResponseClicksign();
+
+        clicksignInterval = setInterval(checkResponseClicksign, 5000);
     });
 }
 
@@ -205,7 +216,9 @@ function renderizarWidget(idSigner) {
 
 
 function checkResponseClicksign() {
-    fetch('/check_response_clicksign')
+    if (!idContractSession) return;
+
+    fetch('/check_response_clicksign?id=' + idContractSession)
         .then(response => response.json())
         .then(data => {
             if (data.signed_file_available) {                 
@@ -222,11 +235,11 @@ function checkResponseClicksign() {
                 statusDownload.innerText = "Arquivo gerado com sucesso!";
                         
                 // Parar de consultar o servidor já que o arquivo chegou
-                clearInterval(interval);
+                clearInterval(clicksignInterval);
+                console.log("Checagem encerrada com sucesso.");
             }
         })
-        .catch(err => console.error("Erro ao checar status:", err));
+        .catch(err => {
+            console.error("Erro ao checar status:", err)
+        });
 }
-
-// Executa a função a cada 3000 milissegundos (3 segundos)
-const interval = setInterval(checkResponseClicksign, 3000);
