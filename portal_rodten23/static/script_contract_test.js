@@ -124,6 +124,13 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
         body: new FormData(formElement)
     })
     .then(response => {
+
+        if (response.status === 429) {
+            return response.json().then(errData => {
+                throw new Error(errData.message);
+            });
+        }
+
         if (!response.ok) throw new Error('Erro na resposta do servidor');
         return response.json();
     })
@@ -146,16 +153,21 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
                 [emailInput, termsCheck, person_name, person_document].forEach(el => {
                     if (el) el.classList.remove('is-valid', 'is-invalid');
                 });
-            }, 3000);
+            }, 5000);
         }
     })
     .catch(error => {
-        console.error('Erro:', error);
-        btn.textContent = 'Erro ao criar contrato!';
+        console.error('Erro no envio:', error);
+        btn.textContent = error.message;
+        btn.style.backgroundColor = "#dc3545";
+        btn.style.color = '#ffffff';
+
         setTimeout(() => {
             btn.textContent = 'Criar Contrato Teste';
+            btn.style.backgroundColor = ''; 
+            btn.style.color = '';
             btn.disabled = false;
-        }, 3000);
+        }, 9000);
     });    
 }
 

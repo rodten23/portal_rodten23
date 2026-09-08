@@ -1,4 +1,7 @@
 from flask import Flask, render_template, redirect, request, flash, jsonify
+from flask_limiter import Limiter
+from flask_limiter import RateLimitExceeded
+from flask_limiter.util import get_remote_address
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from datetime import date
@@ -43,6 +46,14 @@ from portal_rodten23.webhook_response import clicksign_webhook_validator
 load_dotenv()
 
 app = Flask(__name__)
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=['360 per day'],
+    storage_uri='memory://'
+)
+
 app.secret_key = os.getenv('TRANSACTION_ENCRYPTION_PASSWORD')
 
 mail_settings = {
@@ -178,11 +189,17 @@ def privacy_policy_contract_test():
 
 
 @app.route('/contract_test', methods=['GET', 'POST'])
+@limiter.limit(
+    '5 per hour',
+    exempt_when=lambda: request.method == 'GET',
+    error_message='Limite de criação de contratos teste excedido. Tente novamente mais tarde.'
+)
 def contract_test():
     if request.method == 'GET':
         return render_template('contract_test.html')
 
     if request.method == 'POST':
+        
         form_Contract = Contract(
             request.form.get('emailInput'),
             request.form.get('termsCheck'),
@@ -280,6 +297,14 @@ def contract_test():
                 'error': 'internal_error',
                 'message': 'Erro ao processar o contrato no servidor.',
             }), 500
+
+
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return jsonify({
+        'error': 'Muitas requisições',
+        'message': str(e.description)
+    }), 429
 
 
 @app.route('/check_response_clicksign', methods=['GET'])
