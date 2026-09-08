@@ -14,6 +14,7 @@ flask-mail = "^0.10.0"
 requests = "^2.32.3"
 httpx = "^0.28.1"
 httpcore = "^1.0.9"
+flask-limiter = "^4.1.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
