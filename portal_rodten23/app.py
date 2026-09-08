@@ -58,6 +58,8 @@ app.config.update(mail_settings)
 
 mail = Mail(app)
 
+signed_contracts = {}
+
 signed_file_clicksign = {'download_url': None}
 
 
@@ -163,22 +165,22 @@ def valida_cpf(cpf: str) -> bool:
         return True
 
 
-@app.route('/terms_service_contract')
-def terms_service_contract():
+@app.route('/terms_service_contract_test')
+def terms_service_contract_test():
     current_date = date.today()
-    return render_template('terms_service_contract.html', ano_corrente=current_date.year)
+    return render_template('terms_service_contract_test.html', ano_corrente=current_date.year)
 
 
-@app.route('/privacy_policy_contract')
-def privacy_policy_contract():
+@app.route('/privacy_policy_contract_test')
+def privacy_policy_contract_test():
     current_date = date.today()
-    return render_template('privacy_policy_contract.html', ano_corrente=current_date.year)
+    return render_template('privacy_policy_contract_test.html', ano_corrente=current_date.year)
 
 
-@app.route('/contract', methods=['GET', 'POST'])
-def contract():
+@app.route('/contract_test', methods=['GET', 'POST'])
+def contract_test():
     if request.method == 'GET':
-        return render_template('contract.html')
+        return render_template('contract_test.html')
 
     if request.method == 'POST':
         form_Contract = Contract(
@@ -197,7 +199,6 @@ def contract():
 
         if form_Contract.person_document:
             if not valida_cpf(form_Contract.person_document):
-                # Retorna erro 400 (Bad Request) se o CPF for inválido
                 return jsonify({
                     'error': 'invalid_cpf',
                     'message': 'O CPF fornecido é inválido.',
@@ -269,6 +270,7 @@ def contract():
             return jsonify({
                 'success': True,
                 'id_signer': id_signer,
+                'id_document': id_document,
                 'message': 'Contrato teste criado com sucesso!',
             }), 200
 
@@ -282,19 +284,41 @@ def contract():
 
 @app.route('/check_response_clicksign', methods=['GET'])
 def check_clicksign_response():
-    if signed_file_clicksign['download_url']:
+
+    id_document_request = request.args.get('id')
+
+    if not id_document_request:
+        return jsonify({'erro': 'ID do documento ausente.'})
+
+    link = signed_contracts.get(id_document_request)
+
+    print(signed_contracts)
+
+    if link:
         return jsonify({
             'signed_file_available': True,
-            'url': signed_file_clicksign['download_url'],
+            'url': link,
         }), 200
     return jsonify({'signed_file_available': False}), 200
+
+
+    # if signed_file_clicksign['download_url']:
+    #     return jsonify({
+    #         'signed_file_available': True,
+    #         'url': signed_file_clicksign['download_url'],
+    #     }), 200
+    # return jsonify({'signed_file_available': False}), 200
 
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     clicksign_response = clicksign_webhook_validator()
 
-    signed_file_clicksign['download_url'] = clicksign_response['download_url']
+    signed_contracts[f'{clicksign_response['id_document_webhook']}'] = clicksign_response['download_url_webhook']
+
+    print(f"ID documento do webhook: {clicksign_response['id_document_webhook']}")
+
+    #signed_file_clicksign['download_url'] = clicksign_response['download_url']
 
     return jsonify(clicksign_response), 200
 

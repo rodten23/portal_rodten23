@@ -121,6 +121,9 @@ body {
 /* Header */
 .form-header {
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contract-header {
@@ -139,9 +142,14 @@ body {
   border-radius: 999px;
   margin-bottom: 1rem;
   display: inline-block;
+  max-width: 100%;
+  white-space: normal;
+  box-sizing: border-box;
 }
 
 .form-header h1 {
+  text-align: left;
+  width: 100%;
   font-size: 1.55rem;
   font-weight: 600;
   margin: 0 0 0.4rem;
@@ -161,6 +169,8 @@ body {
 }
 
 .form-header p {
+  text-align: left;
+  width: 100%;
   font-size: 0.875rem;
   color: var(--muted);
   margin: 0;
@@ -172,6 +182,11 @@ body {
   color: black;
   margin: 0;
   line-height: 1.6;
+}
+
+.contract-header p a {
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .contract-footer p {
