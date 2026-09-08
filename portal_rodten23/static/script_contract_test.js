@@ -3,6 +3,7 @@ const form = document.getElementById('contractForm');
 const btn = document.getElementById('submitBtn');
 const btnPDF = document.getElementById('btn-pdf');
 const statusDownload = document.getElementById('status');
+let idContractSession = null;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -127,7 +128,8 @@ function enviarFormulario(formElement, emailInput, termsCheck, person_name, pers
         return response.json();
     })
     .then(data => {
-        if (data.id_signer) {
+        if (data.id_signer && data.id_document) {
+            idContractSession = data.id_document;
             console.log('Novo idSigner recebido:', data.id_signer);
             btn.textContent = 'Criar Contrato Teste'; // Restaura o botão após sucesso
             btn.disabled = false;
@@ -214,7 +216,9 @@ function renderizarWidget(idSigner) {
 
 
 function checkResponseClicksign() {
-    fetch('/check_response_clicksign')
+    if (!idContractSession) return;
+
+    fetch('/check_response_clicksign?id=' + idContractSession)
         .then(response => response.json())
         .then(data => {
             if (data.signed_file_available) {                 

@@ -58,6 +58,8 @@ app.config.update(mail_settings)
 
 mail = Mail(app)
 
+signed_contracts = {}
+
 signed_file_clicksign = {'download_url': None}
 
 
@@ -268,6 +270,7 @@ def contract_test():
             return jsonify({
                 'success': True,
                 'id_signer': id_signer,
+                'id_document': id_document,
                 'message': 'Contrato teste criado com sucesso!',
             }), 200
 
@@ -281,19 +284,41 @@ def contract_test():
 
 @app.route('/check_response_clicksign', methods=['GET'])
 def check_clicksign_response():
-    if signed_file_clicksign['download_url']:
+
+    id_document_request = request.args.get('id')
+
+    if not id_document_request:
+        return jsonify({'erro': 'ID do documento ausente.'})
+
+    link = signed_contracts.get(id_document_request)
+
+    print(signed_contracts)
+
+    if link:
         return jsonify({
             'signed_file_available': True,
-            'url': signed_file_clicksign['download_url'],
+            'url': link,
         }), 200
     return jsonify({'signed_file_available': False}), 200
+
+
+    # if signed_file_clicksign['download_url']:
+    #     return jsonify({
+    #         'signed_file_available': True,
+    #         'url': signed_file_clicksign['download_url'],
+    #     }), 200
+    # return jsonify({'signed_file_available': False}), 200
 
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     clicksign_response = clicksign_webhook_validator()
 
-    signed_file_clicksign['download_url'] = clicksign_response['download_url']
+    signed_contracts[f'{clicksign_response['id_document_webhook']}'] = clicksign_response['download_url_webhook']
+
+    print(f"ID documento do webhook: {clicksign_response['id_document_webhook']}")
+
+    #signed_file_clicksign['download_url'] = clicksign_response['download_url']
 
     return jsonify(clicksign_response), 200
 

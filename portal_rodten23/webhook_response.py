@@ -48,14 +48,18 @@ def clicksign_webhook_validator():
         response_clicksign_json = None
 
     # Webhook validado com sucesso!
-    download_url = None
+    download_url_webhook = None
+    id_document_webhook = None
 
     if response_clicksign_json and 'document' in response_clicksign_json:
         downloads = response_clicksign_json['document'].get('downloads', {})
-        download_url = downloads.get('signed_file_url')
-        print(f'Link de download recebido e salvo: {download_url}')
+        download_url_webhook = downloads.get('signed_file_url')
+        id_document_webhook = response_clicksign_json['document']['key']
+        print(f'Link de download recebido: {download_url_webhook}')
+        print(f'ID do documento recebido: {id_document_webhook}')
 
     return {
         'webhook_status': 'processado',
-        'download_url': download_url,
+        'download_url_webhook': download_url_webhook,
+        'id_document_webhook': id_document_webhook,
     }
